@@ -75,6 +75,17 @@ def courses(request):
     completed_courses = sum([getattr(progress, f'course{i}_completed') for i in range(1, total_courses + 1)])  
     return render(request, 'courses.html', {'completed_courses':completed_courses})
 
+
+def courses(request):
+    try:
+        progress = UserProgress.objects.get(user=request.user)
+        total_courses = 6
+        completed_courses = sum([getattr(progress, f'course{i}_completed') for i in range(1, total_courses + 1)])  
+    except UserProgress.DoesNotExist:
+        # If the UserProgress object doesn't exist for the user, set completed_courses to 0.
+        completed_courses = 0
+
+    return render(request, 'courses.html', {'completed_courses': completed_courses})
 def C11(request):
     if request.method == 'POST':
         user = request.user
@@ -124,7 +135,6 @@ def C13(request):
         except UserProgress.DoesNotExist:
             UserProgress.objects.create(user=user, completed_chapters=1, course1_completed=False)
         if not UserBadge.objects.filter(user=user, badge=badge).exists():
-            UserBadge.objects.create(user=user, badge=badge)
             messages.success(request, f'Congratulations! You have completed this chapter and earned the "{badge.name}" badge!')
         #messages.success(request, f'Congratulations! You have completed this chapter and earned the "{badge.name}" badge!')
         return redirect('C21')  # Replace 'C12' with the URL name for the next chapter (C12)
