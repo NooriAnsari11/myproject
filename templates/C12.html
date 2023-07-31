@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+{%load static%}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>courses</title>
+ 
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+ 
+    <link rel="stylesheet" type="text/css" href="{% static 'style2.css'%}"> 
+</head>
+<style>
+
+
+.navbar a[href="{% url 'C12' %}"] {
+    background-color: #8e44ad; /* Change this to the desired highlight color */
+    color: white; /* Change this to the desired font color */
+}
+.profile2 .image{
+   height: 10rem;
+   width: 10rem;
+  margin-left: 10rem;
+  margin-top: 4rem;
+   margin-bottom: 5rem;
+   border-radius: 10%;
+}
+.inline-btn2{
+    border-radius: 0.5rem;
+    color: #fff;
+    font-size: 1.8rem;
+    cursor: pointer;
+    text-transform: capitalize;
+    padding: 1rem 3rem;
+    text-align: center;
+    margin-top: 1rem;
+    display: inline-block;
+    background-color: var(--main-color);
+    right: 20px;
+    margin-left: 700px;
+}
+.inline-btn2:hover{
+   background-color: var(--black);
+   color: var(--white);
+}
+</style>
+<body>
+    <header class="header">
+   
+        <section class="flex">
+     
+            <a href="home.html" class="logo">AIPedia</a>
+
+    
+           <div class="icons">
+            <a href="#"><i class="fas fa-graduation-cap"></i><span>Courses</span></a>
+              <div id="menu-btn" class="fas fa-bars"></div>
+              <div id="search-btn" class="fas fa-search"></div>
+              <div id="user-btn" class="fas fa-user"></div>
+              <div id="toggle-btn" class="fas fa-sun"></div>
+              
+           </div>
+     
+           <div class="profile">
+              <img src="images/pic-1.jpg" class="image" alt="">
+              <h3 class="name">{{ user.get_username }}</h3>
+              <p class="role">studen</p>
+              <a href="profile.html" class="btn">view profile</a>
+
+              <div class="flex-btn">
+                 <a href="login.html" class="option-btn">login</a>
+                 <a href="register.html" class="option-btn">register</a>
+              </div>
+           </div>
+     
+        </section>
+     
+     </header> 
+     
+<div class="side-bar">
+
+    <div id="close-btn">
+       <i class="fas fa-times"></i>
+    </div>
+ 
+    <div class="profile2">
+       
+            <img src="{% static 'images/logo.png' %}" class="image" alt="">
+            
+    </div>
+ 
+    <nav class="navbar">
+    <ul>
+       
+       <a href="{% url 'C11' %}">1.1 Introduction to AI</a>
+       <a href="{% url 'C12' %}">1.2 Definition</a>
+       <a href="{% url 'C13' %}">1.3 Related Fields</a>
+
+    </ul>
+    </nav>
+ 
+ </div>
+
+ <section class="courses">
+    <div>
+<h1> 'Definition Of AI'</h1>
+</br>
+<p>Artificial intelligence (AI) is currently one of the hottest buzzwords in tech and with good reason. The last few years have seen several innovations and advancements that have previously been solely in the realm of science fiction slowly transform into reality. Experts regard artificial intelligence as a factor of production, which has the potential to introduce new sources of growth and change the way work is done across industries. For instance, this PWC article predicts that AI could potentially contribute $15.7 trillion to the global economy by 2035. China and the United States are primed to benefit the most from the coming AI boom, accounting for nearly 70% of the global impact.</p>
+<img src="{% static 'images/self.gif' %}"   />
+<h2>Artificial Intelligence is a method of making a computer, a computer-controlled robot, or a software think intelligently like the human mind. AI is accomplished by studying the patterns of the human brain and by analyzing the cognitive process. The outcome of these studies develops intelligent software and systems.</h2>
+<video width="320" height="240" controls>
+    <source src="{% static 'video/1.mp4' %}" type="video/mp4">
+   
+  </video>
+
+
+ </section>
+ <form method="post">
+    {% csrf_token %}
+    <!-- Your existing content for chapter C11 -->
+
+    <!-- Add the "Next" button -->
+    <button type="submit" class="inline-btn2">Next >></button>
+</form>
+ 
+</body>
+
+<script>
+
+</script>
+<script src="{% static 'js/script.js' %}"></script>
+</html>

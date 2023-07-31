@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Introduction To AI-Pedia</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'style.css'%}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?
+family=Poppins:wght@100; 200; 300; 400; 600; 700&display-swap"
+rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font
+awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .b{
+        background-color : #858fdf
+        }
+    img {
+  transition: transform 0.5s;
+}
+
+img:hover {
+ transform: rotate(2deg);
+}
+  .card {
+
+      transition: 0.3s;
+      width: 30%;
+      border-radius: 5px;
+      background: #ed5899;
+      position: relative;
+      padding-top: 10px;
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      position: absolute;
+      top: -100px;
+      left: 0;
+     /* border: 5px solid white; */
+      border-radius: 5px;
+    }
+
+    .card:hover {
+      box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
+
+    .container {
+  padding: 20px 20px 15px 20px; /* Adjust the first value (top padding) as needed */
+  background-color:#fff;
+}
+
+    .image-bg {
+      background-color: red;
+      height: 250px;
+      overflow: hidden;
+      border-radius: 5px 5px 0 0;
+    }
+    .cardB{
+    margin-top:100px;
+    margin-left:50px;
+    }
+     .line {
+     margin-top:90px;
+      width: 100%;
+      height: 1px;
+      background-color: #e7d6cb;
+    }
+     .line2 {
+      width: 100%;
+      height: 1px;
+      background-color: #e7d6cb;
+    }
+.ul-links{
+margin-top:5px;
+margin-right:100px;
+}
+ol{
+padding:10px;
+}
+ol li a {
+font-size : 16px;
+color: #000;
+font-weight: 300;
+line-height: 22px;
+padding: 10px 10px;
+margin-top : 10px;
+font-family: 'MonoManiacOne' ,sans-serif;
+}
+a{
+text-decoration:none;
+color:black;
+}
+.progress-bar {
+      height: 10px;
+      background-color: #ccc;
+      margin-bottom: 10px;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background-color: purple;
+      width: 0%;
+    }
+</style>
+</head>
+<body class="b">
+
+<div class="header2">
+<nav class="nav-links2">
+    <a href="index.html">
+    <img src="{% static 'images/logo2.png' %}" width="150" height="100">
+        </a>
+    <div class="nav-links">
+    <ul>
+        <li><a href="#"></a></li>
+        <li><a href="">Dashboard</a></li>
+        <li><a href="{% url 'logout' %}">Log Out</a></li>
+    </ul>
+        </div>
+</nav>
+    <section class="intro">
+        <div>
+        <h1 class="inh">WELCOME TO THE COURSE!!</h1><br><br>
+    </section>
+</div>
+<section class="cardB">
+<div class="card">
+  <img  src="{% static 'images/teacher.png' %}" alt="Your Image">
+    <div class="line"></div>
+  <div class="container">
+      <p class="intro2">Chapter 1</p>
+      <a href="chapter1.php"><h4><b>What is an AI?</b></h4></a>
+
+      <ol class="ul-links">
+      <li><a href="#">Defining AI</a></li>
+    <li><a href="#">Applications Of AI</a></li>
+      <li><a href="#">Fields Under AI</a></li>
+      </ol>
+       <div class="progress-bar">
+    <div class="progress-bar-fill"></div>
+  </div>
+  </div>
+</div>
+</section>
+<script>
+
+  // Get the progress bar element and the list of chapters
+  const progressBar = document.querySelector('.progress-bar-fill');
+  const chapters = document.querySelectorAll('.ul-links li');
+const completedChapters = chapters.length - 1; // Subtract 1 to exclude the "Chapter 1" item
+const totalChapters = chapters.length;
+const progressPercentage = (completedChapters / totalChapters) * 100;
+
+  // Calculate the progress percentage based on completed chapters
+ // const progressPercentage = (chapters.length - 1) / (chapters.length) * 100;
+
+  // Set the width of the progress bar fill based on the progress percentage
+  progressBar.style.width = progressPercentage + '%';
+
+</script>
+</body>
+</html>

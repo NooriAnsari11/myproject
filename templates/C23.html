@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+{%load static%}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>courses</title>
+ 
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'style2.css'%}"> 
+    <style>
+ 
+
+.navbar a[href="{% url 'C21' %}"] {
+    background-color: #8e44ad; /* Change this to the desired highlight color */
+    color: white; /* Change this to the desired font color */
+}
+.profile2 .image{
+   height: 10rem;
+   width: 10rem;
+  margin-left: 10rem;
+  margin-top: 4rem;
+   margin-bottom: 5rem;
+   border-radius: 10%;
+}
+
+/* Add your CSS animations here, e.g., for hovering on section elements */
+.container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      margin: 1em;
+    }
+
+    #description {
+      font-size: 2em;
+      color: white;
+      height: 50px;
+      text-shadow: 2px 2px 2px black;
+    }
+
+    .row {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+    }
+
+    .square {
+      width: 40px;
+      height: 40px;
+      background: white;
+      border-radius: 16px;
+      border: 4px solid grey;
+      font-size: 3em; /* Increase font size here */
+      margin: 4px;
+    }
+
+    .highlight {
+      border-color: red;
+    }
+
+    body {
+      background: #e3bdbd;
+      
+    }
+    .player {
+  color: blue;
+}
+
+.ai {
+  color: red;
+}
+
+
+
+h1 {
+  text-align: center;
+}
+
+h2 {
+  margin-top: 20px;
+}
+
+p {
+  margin-bottom: 15px;
+}
+
+ol {
+  margin-left: 30px;
+}
+
+li {
+  margin-bottom: 10px;
+}
+ </style>
+</head>
+<body>
+
+    {% for message in messages %}
+    
+
+    <div id="messageModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            {{message}}
+        
+        {% for user_badge in user.userbadge_set.all %}
+        
+            <div class="badge">
+                <img  src="{{ user_badge.badge.image.url }}" alt="{{ user_badge.badge.name }}">
+          </div>
+        </div>
+
+{% endfor %}
+    </div>
+    
+{% endfor %}
+
+<header class="header">
+   
+    <section class="flex">
+ 
+        <a href="home.html" class="logo">AIPedia</a>
+
+
+       <div class="icons">
+        <a href="#"><i class="fas fa-graduation-cap"></i><span>Courses</span></a>
+          <div id="menu-btn" class="fas fa-bars"></div>
+          <div id="search-btn" class="fas fa-search"></div>
+          <div id="user-btn" class="fas fa-user"></div>
+          <div id="toggle-btn" class="fas fa-sun"></div>
+          
+       </div>
+ 
+       <div class="profile">
+          <img src="images/pic-1.jpg" class="image" alt="">
+          <h3 class="name">{{ user.get_username }}</h3>
+          <p class="role">studen</p>
+          <a href="profile.html" class="btn">view profile</a>
+
+          <div class="flex-btn">
+             <a href="login.html" class="option-btn">login</a>
+             <a href="register.html" class="option-btn">register</a>
+          </div>
+       </div>
+ 
+    </section>
+ 
+ </header> 
+ 
+<div class="side-bar">
+
+<div id="close-btn">
+   <i class="fas fa-times"></i>
+</div>
+
+<div class="profile2">
+   
+        <img src="{% static 'images/logo.png' %}" class="image" alt="">
+        
+</div>
+
+<nav class="navbar">
+
+   <ul>
+    <li>
+   <a href="{% url 'C21' %}">2.1 Turing Test</a>
+   <a href="{% url 'C22' %}">2.2 AI Problem Solving</a>
+    <ul>
+        <li><a href="{% url 'C22a' %}">Sub Topic</a></li>
+    </ul>
+   
+   <a href="{% url 'C23' %}">2.3 Search and Games</a>
+</li>
+</ul>
+
+</nav>
+
+</div>
+
+<section class="courses">
+    <div class="container">
+        <div class="lesson">
+          <h1>  Search and games</h1>
+            <p>In this section, we will study a classic AI problem: games. The simplest scenario, which we will focus on for the sake of clarity, are two-player, perfect-information games such as tic-tac-toe and chess.</p>
+            <h3>Example: playing tic tac toe</h3>     
+        </div>
+        <div class="header">
+          <span>Tic Tac Toe!</span>
+        </div>
+        <div class="container">
+          <div id="description"></div>
+        </div>
+        <div id="rows">
+        </div>
+    </div>
+    <div>
+    
+       <h1>Game Trees in AI</h1>
+    <p>
+      Game trees are an essential concept in artificial intelligence (AI) and are particularly used in the study of games and decision-making.
+      A game tree is a graphical representation of all possible moves and outcomes in a sequential, turn-based, or concurrent game. It allows AI algorithms to explore and analyze different moves, strategies, and potential outcomes to make intelligent decisions.
+    </p>
+    <h2>How Game Trees Work</h2>
+    <ol>
+      <li>Representation: A game tree starts with a root node, which represents the current state of the game. From the root, branches extend to child nodes, representing possible moves that a player can make. Each child node, in turn, becomes the root of a sub-tree representing the game state after that particular move has been made.</li>
+      <li>Levels: The depth of the tree corresponds to the number of moves made in the game. Each level of the tree represents a specific player's turn, and the branches at that level represent the different moves that player can make.</li>
+      <li>Leaf nodes: The game tree continues expanding until reaching an end state, which is typically represented by leaf nodes. These are terminal states of the game where no further moves are possible. At a leaf node, the game's outcome is evaluated, usually with a numerical value representing the game's utility or score.</li>
+      <li>Minimax algorithm: One of the most common algorithms used to analyze game trees is the minimax algorithm. It is a recursive algorithm that evaluates each leaf node's utility value and propagates this information back up the tree to the root node, considering the best moves for each player. The idea is to maximize the player's gains while minimizing the opponent's gains.</li>
+      <li>Pruning: Game trees can grow exponentially in size, especially in complex games like chess or Go. To handle this complexity, techniques like alpha-beta pruning are employed to eliminate branches that are guaranteed to be irrelevant to the final decision, thus reducing the search space and speeding up the algorithm's performance.</li>
+    </ol>
+    <iframe width="700" height="315" src="https://www.youtube.com/embed/KU9Ch59-4vw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+     
+    </div>
+      <form method="post">
+        <label for="message">Discuss the result of the game played above and how the Minimax algorithm ensured that the AI made optimal moves throughout the game. Explain why the AI was unbeatable and how the Minimax algorithm works to maximize the AI's chances of winning or achieving a draw.(Your answer will be reviewed less than 200 words.)</label>
+      </br>
+        <textarea id="message" name="message" rows="4" cols="50"></textarea>
+        
+      </form>
+</section>
+</body>
+
+<script src="{% static 'js/script.js' %}"></script>
+<script src="{% static 'js/main.js' %}" type="module"></script>
+</html>

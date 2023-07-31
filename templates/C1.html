@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to AI - YourWebsite</title>
+    <link rel="stylesheet" href="path-to-your-styles.css">
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+}
+
+#header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#logo img {
+    height: 50px;
+}
+
+#main-nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#main-nav li {
+    display: inline;
+    margin: 0 15px;
+}
+
+#main-nav a {
+    text-decoration: none;
+    color: black;
+}
+
+#user-actions a {
+    text-decoration: none;
+    color: black;
+    margin-left: 10px;
+}
+
+#user-actions a:first-child {
+    margin-left: 0;
+}
+body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            padding: 10px;
+            max-width: 800px;
+            margin: 0 auto;
+            overflow-x: hidden;
+        }
+        
+        header {
+            background-color: #f8f9fa;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            color: #007BFF;
+        }
+        
+        #course-overview {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        ul li {
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+/* ... Rest of your styles ... */
+
+    </style>
+</head>
+<body>
+    <header>
+        <div id="header-content">
+            <!-- Logo on the left -->
+            <div id="logo">
+                <a href="{% url 'index'%}">
+                    <img src="{%static 'images/logo.png'%}" alt="Your Website Logo">
+                </a>
+            </div>
+
+            <!-- Navigation in the center -->
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="{% url 'courses'%}">Back To Course Screen</a></li>
+                    <!-- Add more navigation items as needed -->
+                </ul>
+            </nav>
+
+            <!-- Profile or Logout button on the right -->
+            <div id="user-actions">
+                <a href="{% url 'Profile'%}">Profile</a>
+                <a href="{% url 'logout'%}">Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="course-overview">
+        <h2>Course Overview</h2>
+        <p>Welcome to the "Introduction to Artificial Intelligence" section. In this course, you will embark on a journey that will introduce you to one of the most rapidly growing and fascinating fields in the world today.</p>
+        <p>As you explore this section, you will learn about the following topics:</p>
+        <ul>
+            <li>Introduction to AI: Gain insights into the world of Artificial Intelligence and its potential impact.</li>
+            <li>Definition of AI: Understand the core definitions and principles that underpin AI.</li>
+            <li>Related Fields: Explore the different fields related to AI, such as Machine Learning, Neural Networks, and more.</li>
+            <li>The Turing Test: Learn about this iconic test that is used to measure a machine's ability to exhibit intelligent behavior.</li>
+        </ul>
+        <p>We hope this course will provide you with a strong foundation and inspire you to delve deeper into the fascinating world of AI. Enjoy your journey!</p>
+    </section>
+    <!-- Rest of your page's HTML follows... -->
+</body>
+</html>

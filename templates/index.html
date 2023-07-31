@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+{%load static%}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>AI-Pedia</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'style.css'%}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?
+family=Poppins:wght@100; 200; 300; 400; 600; 700&display-swap"
+rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font
+awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body class="body">
+<div class="header">
+<nav>
+    <a href="#index.html">
+    <img src="{% static 'images/logo2.png' %}" width="150" height="100">
+        </a>
+    <div class="nav-links">
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Learning</a></li>
+    </ul>
+        </div>
+</nav>
+<!--<p>Welcome To AI-Pedia</p>-->
+    <div class="text-box"  align="center">
+ <button id="start-button">Start our courses</button>
+    </div>
+</div>
+<!--what will you learn-->
+<section class="course">
+<h1>What will you learn</h1>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    <div class="row">
+        <div class="course-col">
+<h3>AI</h3>
+<p>Artificial intelligence (AI) is intelligence-perceiving, synthesizing, and inferring information-demonstrated by machines, as opposed to intelligence displayed by humans or by other animals. </p>
+</div>
+        <div class="course-col">
+<h3>ML</h3>
+<p>Machine Learning is an AI technique that teaches computers to learn from experience. Machine learning algorithms use computational methods to "learn" information directly from data without relying on a predetermined equation as a model.</p>
+</div><div class="course-col">
+<h3>Computer Vision</h3>
+<p>Computer vision is a field of artificial intelligence (AI) that enables computers and systems to derive meaningful information from digital images, videos and other visual inputs - and take actions or make recommendations based on that information.</p>
+</div>
+
+    </div>
+</section>
+
+<section class="campus">
+    <div id="main-content">
+        <div class="row">
+            <div class="campus-col">
+                <a href="{% url 'intro2' %}" id="intro-link">
+                    <img src="{% static 'images/Intro.png' %}" width="50%">
+                    <div class="layer">
+
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+</section>
+
+</body>
+<script>
+    $("#start-button").click(function() {
+    $('html, body').animate({
+        scrollTop: $("#main-content").offset().top
+    }, 1000);
+
+});
+
+</script>
+</html>

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+{%load static%}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>courses</title>
+ 
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+ 
+    <link rel="stylesheet" type="text/css" href="{% static 'style2.css'%}"> 
+    <style>
+       .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7);
+}
+
+.badge-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  width: 100px; /* Adjust this if you want the badge container to be smaller or larger */
+}
+.badge img {
+  width: 100px;
+  height: 100px;
+  background-color: #658fd8;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 24px;
+  animation: bounce 1s infinite alternate;
+}
+
+@keyframes bounce {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.2);
+  }
+}
+.modal-content {
+    background-color: #f4f4f4;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    animation-name: modalopen;
+    animation-duration: 1s;
+}
+
+.close-button {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@keyframes modalopen {
+    from {opacity: 0}
+    to {opacity: 1}
+}
+@keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+@keyframes fadeOut {
+  0% {opacity: 1;}
+  100% {opacity: 0;}
+}
+
+@keyframes scale {
+  0% {transform: scale(0.9);}
+  100% {transform: scale(1);}
+}
+
+#message {
+  animation: fadeIn 0.5s, scale 0.5s;
+}
+
+#message.hide {
+  animation: fadeOut 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.navbar a[href="{% url 'C21' %}"] {
+    background-color: #8e44ad; /* Change this to the desired highlight color */
+    color: white; /* Change this to the desired font color */
+}
+.profile2 .image{
+   height: 10rem;
+   width: 10rem;
+  margin-left: 10rem;
+  margin-top: 4rem;
+   margin-bottom: 5rem;
+   border-radius: 10%;
+}
+.inline-btn2{
+    border-radius: 0.5rem;
+    color: #fff;
+    font-size: 1.8rem;
+    cursor: pointer;
+    text-transform: capitalize;
+    padding: 1rem 3rem;
+    text-align: center;
+    margin-top: 1rem;
+    display: inline-block;
+    background-color: var(--main-color);
+    right: 20px;
+    margin-left: 700px;
+}
+.inline-btn2:hover{
+   background-color: var(--black);
+   color: var(--white);
+}
+h1 {
+      text-align: center;
+      color: #0066cc;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin-top: 30px;
+      color: #0066cc;
+    }
+
+    p {
+      text-indent: 20px;
+    }
+
+  ol,ul {
+      padding-left: 40px;
+    }
+
+    .highlight {
+      background-color: #f0f0f0;
+      padding: 5px;
+      border-radius: 5px;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background-color: #0066cc;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .cta-button:hover {
+      background-color: #0050a0;
+    }
+
+    /* Responsive styling for smaller screens */
+    @media screen and (max-width: 600px) {
+      body {
+        margin: 10px;
+      }
+    }
+
+    </style>
+</head>
+<body>
+
+    {% for message in messages %}
+    
+
+    <div id="messageModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            {{message}}
+        
+        {% for user_badge in user.userbadge_set.all %}
+        
+            <div class="badge">
+                <img  src="{{ user_badge.badge.image.url }}" alt="{{ user_badge.badge.name }}">
+          </div>
+        </div>
+
+{% endfor %}
+    </div>
+    
+{% endfor %}
+
+<header class="header">
+   
+    <section class="flex">
+ 
+        <a href="home.html" class="logo">AIPedia</a>
+
+
+       <div class="icons">
+        <a href="#"><i class="fas fa-graduation-cap"></i><span>Courses</span></a>
+          <div id="menu-btn" class="fas fa-bars"></div>
+          <div id="search-btn" class="fas fa-search"></div>
+          <div id="user-btn" class="fas fa-user"></div>
+          <div id="toggle-btn" class="fas fa-sun"></div>
+          
+       </div>
+ 
+       <div class="profile">
+          <img src="images/pic-1.jpg" class="image" alt="">
+          <h3 class="name">{{ user.get_username }}</h3>
+          <p class="role">studen</p>
+          <a href="profile.html" class="btn">view profile</a>
+
+          <div class="flex-btn">
+             <a href="login.html" class="option-btn">login</a>
+             <a href="register.html" class="option-btn">register</a>
+          </div>
+       </div>
+ 
+    </section>
+ 
+ </header> 
+ 
+<div class="side-bar">
+
+<div id="close-btn">
+   <i class="fas fa-times"></i>
+</div>
+
+<div class="profile2">
+   
+        <img src="{% static 'images/logo.png' %}" class="image" alt="">
+        
+</div>
+
+<nav class="navbar">
+
+   
+   <a href="{% url 'C21' %}">1.1 Turing Test</a>
+   <a href="{% url 'C22' %}">1.2 AI Problem Solving</a>
+   <a href="{% url 'C23' %}">2.3 Search and Games</a>
+
+
+</nav>
+
+</div>
+
+<section class="courses">
+<div>
+    <h1>The Turing Test - Gauging AI's Human-Like Intelligence</h1>
+
+    <h2>Introduction</h2>
+    <p>
+      The Turing Test, proposed by British mathematician and computer scientist Alan Turing in 1950, is a pivotal concept
+      in the field of artificial intelligence. It serves as a benchmark for evaluating a machine's ability to exhibit
+      human-like intelligence and behavior. Understanding the Turing Test is crucial to appreciate the advancements and
+      challenges in AI development.
+    </p>
+  
+    <h2>Definition</h2>
+    <p>
+      The Turing Test is a test of a machine's capability to demonstrate intelligent behavior indistinguishable from
+      that of a human. In this test, a human evaluator interacts with both a human and a machine (usually through a
+      computer interface) without knowing which is which. If the evaluator is unable to reliably differentiate between
+      the human and the machine based on their responses to questions or conversations, the machine is said to have passed
+      the Turing Test.
+    </p>
+  
+    <h2>Components of the Turing Test</h2>
+    <ol>
+      <li><strong>The Human Evaluator:</strong> Also known as the "judge" or "interrogator," this person's role is to
+        engage in natural language conversations with the participants (one human and one machine) without knowing which
+        is which.</li>
+      <li><strong>The Human Participant:</strong> A real human being who interacts with the evaluator.</li>
+      <li><strong>The Machine Participant:</strong> An AI-powered machine or program designed to emulate human-like
+        responses and behavior.</li>
+    </ol>
+  
+    <h2>Objective</h2>
+    <p>
+      The main objective of the Turing Test is to assess whether a machine can exhibit intelligence equivalent to or
+      indistinguishable from human intelligence. If the machine can convincingly mimic human responses and behavior, it
+      demonstrates a level of artificial general intelligence (AGI), suggesting a higher understanding of language,
+      reasoning, and problem-solving.
+    </p>
+  
+    <h2>Limitations</h2>
+    <p>
+      While the Turing Test is an essential concept, it has some limitations:
+    </p>
+    <ul>
+      <li>Passing the Turing Test doesn't guarantee that a machine truly understands the meaning behind the words it uses
+        or possesses consciousness.</li>
+      <li>Some humans may not accurately judge the machine's intelligence, leading to false negatives or positives.</li>
+      <li>The Turing Test focuses on behavior rather than the underlying mechanisms of intelligence.</li>
+    </ul>
+  
+    <h2>Evaluating AI Beyond the Turing Test</h2>
+    <p>
+      As AI research progresses, it has become evident that relying solely on the Turing Test for evaluating AI is
+      insufficient. Today, AI researchers use a combination of measures, such as domain-specific tests, benchmarks, and
+      objective performance metrics, to comprehensively assess AI capabilities.
+    </p>
+  
+    <h2>Conclusion</h2>
+    <p>
+      The Turing Test is a fundamental concept that laid the foundation for evaluating AI's human-like intelligence. While
+      it remains significant, AI evaluation has evolved to encompass a more comprehensive approach. Understanding the
+      Turing Test's principles will help learners appreciate the ongoing quest to create advanced AI systems and the
+      ethical considerations surrounding artificial intelligence.
+    </p>
+  
+    
+
+</section>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+
+var modal = document.getElementById("messageModal");
+var span = document.getElementsByClassName("close-button")[0];
+
+// Open the modal
+modal.style.display = "block";
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+</script>
+<script src="{% static 'js/script.js' %}"></script>
+</html>

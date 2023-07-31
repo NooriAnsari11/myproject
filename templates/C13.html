@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+{%load static%}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>courses</title>
+ 
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+ 
+    <link rel="stylesheet" type="text/css" href="{% static 'style2.css'%}"> 
+</head>
+<style>
+
+
+.navbar a[href="{% url 'C13' %}"] {
+    background-color: #8e44ad; /* Change this to the desired highlight color */
+    color: white; /* Change this to the desired font color */
+}
+
+.profile2 .image{
+   height: 10rem;
+   width: 10rem;
+  margin-left: 10rem;
+  margin-top: 4rem;
+   margin-bottom: 5rem;
+   border-radius: 10%;
+}
+
+
+.question {
+    font-size:16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.option {
+    width: 100px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #684e4e;
+    border: none;
+    cursor: pointer;
+}
+
+.answer {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.quiz-container .options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.quiz-container .option {
+    padding: 10px 20px;
+    background-color: #dcbebe;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.quiz-container .option:hover {
+    background-color: #3f3838;
+}
+
+.quiz-container .option.selected {
+    background-color: #8e44ad;
+    color: white;
+}
+
+.quiz-container .submit-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #8e44ad;;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.quiz-container .submit-button:hover {
+    background-color: #2980b9;
+}
+
+.quiz-container .submit-button:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+.inline-btn2{
+    border-radius: 0.5rem;
+    color: #fff;
+    font-size: 1.8rem;
+    cursor: pointer;
+    text-transform: capitalize;
+    padding: 1rem 3rem;
+    text-align: center;
+    margin-top: 1rem;
+    display: inline-block;
+    background-color: var(--main-color);
+    right: 20px;
+    margin-left: 700px;
+}
+.inline-btn2:hover{
+   background-color: var(--black);
+   color: var(--white);
+}
+</style>
+<body>
+    <header class="header">
+   
+        <section class="flex">
+     
+            <a href="home.html" class="logo">AIPedia</a>
+
+    
+           <div class="icons">
+            <a href="#"><i class="fas fa-graduation-cap"></i><span>Courses</span></a>
+              <div id="menu-btn" class="fas fa-bars"></div>
+              <div id="search-btn" class="fas fa-search"></div>
+              <div id="user-btn" class="fas fa-user"></div>
+              <div id="toggle-btn" class="fas fa-sun"></div>
+              
+           </div>
+     
+           <div class="profile">
+              <img src="images/pic-1.jpg" class="image" alt="">
+              <h3 class="name">{{ user.get_username }}</h3>
+              <p class="role">studen</p>
+              <a href="profile.html" class="btn">view profile</a>
+
+              <div class="flex-btn">
+                 <a href="login.html" class="option-btn">login</a>
+                 <a href="register.html" class="option-btn">register</a>
+              </div>
+           </div>
+     
+        </section>
+     
+     </header> 
+     
+<div class="side-bar">
+
+    <div id="close-btn">
+       <i class="fas fa-times"></i>
+    </div>
+ 
+    <div class="profile2">
+       
+            <img src="{% static 'images/logo.png' %}" class="image" alt="">
+            
+    </div>
+ 
+    <nav class="navbar">
+    <ul>
+       
+       <a href="{% url 'C11' %}">1.1 Introduction to AI</a>
+       <a href="{% url 'C12' %}">1.2 Definition</a>
+       <a href="{% url 'C13' %}">1.3 Related Fields</a>
+
+    </ul>
+    </nav>
+ 
+ </div>
+
+ <section class="courses">
+    <div>
+<h1>Related fields</h1>
+</br>
+<p>In addition to AI, there are several other closely related topics that are good to know at least by name. These include machine learning, data science, and deep learning.</p>
+<p>Machine learning can be said to be a subfield of AI, which itself is a subfield of computer science (such categories are often somewhat imprecise and some parts of machine learning could be equally well or better belong to statistics). Machine learning enables AI solutions that are adaptive. A concise definition can be given as follows:</p>
+<p class="key">Machine learning
+    Systems that improve their performance in a given task with more and more experience or data.</p>
+<p class="Deep">Deep learning is a subfield of machine learning, which itself is a subfield of AI, which itself is a subfield of computer science. We will meet deep learning in some more detail in Chapter 5, but for now let us just note that the “depth” of deep learning refers to the complexity of a mathematical model, and that the increased computing power of modern computers has allowed researchers to increase this complexity to reach levels that appear not only quantitatively but also qualitatively different from before. As you notice, science often involves a number of progressively more special subfields, subfields of subfields, and so on. This enables researchers to zoom into a particular topic so that it is possible to catch up with the ever increasing amount of knowledge accrued over the years, and produce new knowledge on the topic — or sometimes, correct earlier knowledge to be more accurate.</p>
+<p class="DS">Data science is a recent umbrella term (term that covers several subdisciplines) that includes machine learning and statistics, certain aspects of computer science including algorithms, data storage, and web application development. Data science is also a practical discipline that requires understanding of the domain in which it is applied in, for example, business or science: its purpose (what "added value" means), basic assumptions, and constraints. Data science solutions often involve at least a pinch of AI (but usually not as much as one would expect from the headlines).</p>
+<p>Robotics means building and programming robots so that they can operate in complex, real-world scenarios. In a way, robotics is the ultimate challenge of AI since it requires a combination of virtually all areas of AI. For example:
+
+    Computer vision and speech recognition for sensing the environment
+    Natural language processing, information retrieval, and reasoning under uncertainty for processing instructions and predicting consequences of potential actions
+    Cognitive modeling and affective computing (systems that respond to expressions of human feelings or that mimic feelings) for interacting and working together with humans
+    Many of the robotics-related AI problems are best approached by machine learning, which makes machine learning a central branch of AI for robotics.</p>
+<h3>Exercise 2: Taxonomy of AI</h3>
+<p>Your task: Construct a taxonomy in the Euler diagram example given below showing the relationships between the following things: AI, machine learning, computer science, data science, and deep learning.</p>
+    <img src="{% static 'images/exercise2.svg' %}"   />
+
+    <div class="quiz-container">
+        <div class="question">Where would you put AI?</div>
+        <div class="options">
+            <button class="option" onclick="selectOption(0, 'incorrect', this)">Section A</button>
+            <button class="option" onclick="selectOption(0, 'correct', this)">Section B</button>
+            <button class="option" onclick="selectOption(0, 'incorrect', this)">Section C</button>
+            <button class="option" onclick="selectOption(0, 'incorrect', this)">Section D</button>
+            <button class="option" onclick="selectOption(0, 'incorrect', this)">Section E</button>
+        </div>
+        <div class="answer"></div>
+
+        <div class="question">Where would you put Data Science?</div>
+        <div class="options">
+            <button class="option" onclick="selectOption(1, 'incorrect', this)">Section A</button>
+            <button class="option" onclick="selectOption(1, 'incorrect', this)">Section B</button>
+            <button class="option" onclick="selectOption(1, 'correct', this)">Section C</button>
+            <button class="option" onclick="selectOption(1, 'incorrect', this)">Section D</button>
+            <button class="option" onclick="selectOption(1, 'incorrect', this)">Section E</button>
+        </div>
+        <div class="answer"></div>
+        <div class="question">Where would you put Machine Learning?</div>
+        <div class="options">
+            <button class="option" onclick="selectOption(2, 'incorrect', this)">Section A</button>
+            <button class="option" onclick="selectOption(2, 'incorrect', this)">Section B</button>
+            <button class="option" onclick="selectOption(2, 'correct', this)">Section C</button>
+            <button class="option" onclick="selectOption(2, 'incorrect', this)">Section D</button>
+            <button class="option" onclick="selectOption(2, 'incorrect', this)">Section E</button>
+        </div>
+        <div class="answer"></div>
+        <div class="question">Where would you put Computer Science?</div>
+        <div class="options">
+            <button class="option" onclick="selectOption(3, 'correct', this)">Section A</button>
+            <button class="option" onclick="selectOption(3, 'incorrect', this)">Section B</button>
+            <button class="option" onclick="selectOption(3, 'incorrect', this)">Section C</button>
+            <button class="option" onclick="selectOption(3, 'incorrect', this)">Section D</button>
+            <button class="option" onclick="selectOption(3, 'incorrect', this)">Section E</button>
+        </div>
+        <div class="answer"></div>
+        <div class="question">Where would you put Deep Learning?</div>
+        <div class="options">
+            <button class="option" onclick="selectOption(4, 'correct', this)">Section A</button>
+            <button class="option" onclick="selectOption(4, 'incorrect', this)">Section B</button>
+            <button class="option" onclick="selectOption(4, 'incorrect', this)">Section C</button>
+            <button class="option" onclick="selectOption(4, 'incorrect', this)">Section D</button>
+            <button class="option" onclick="selectOption(4, 'incorrect', this)">Section E</button>
+        </div>
+        <div class="answer"></div>
+
+        <button class="submit-button" onclick="submitQuiz()" disabled>Submit</button>
+
+
+    </div>
+
+
+ </section>
+ <form method="post">
+    {% csrf_token %}
+    <!-- Your existing content for chapter C11 -->
+
+    <!-- Add the "Next" button -->
+    <button type="submit" class="inline-btn2">Next >></button>
+</form>
+ 
+
+</body>
+
+<script>
+
+const submitButton = document.querySelector('.submit-button');
+
+/*function selectOption(answer) {
+    selectedOption = answer;
+    submitButton.disabled = false; // Enable the Submit button when an option is selected
+}*/
+
+let selectedAnswers = [null, null,null,null,null]; // An array of arrays for two sets of questions
+
+
+
+function selectOption(setIndex, answer, button) {
+            selectedAnswers[setIndex] = answer;
+            const options = document.querySelectorAll('.options')[setIndex].querySelectorAll('.option');
+            options.forEach(option => {
+                option.classList.remove('selected');
+            });
+            button.classList.add('selected');
+
+            // Check if all answers are selected for all sets
+            const allAnswersSelected = selectedAnswers.every(answer => answer !== null);
+
+            // Enable the submit button only when all answers are selected for all sets
+            const submitButton = document.querySelector('.submit-button');
+            submitButton.disabled = !allAnswersSelected;
+        }
+
+        function submitQuiz() {
+        const quizData = [
+            {
+                question: 'Where would you put AI?',
+                correctAnswer: 'correct',
+                description: 'AI is a part of computer science.'
+            },
+            {
+                question: 'Where would you put Data Science?',
+                correctAnswer: 'correct',
+                description: 'Data science needs computer science and AI. However, it also involves a lot of statistics, business, law, and other application domains, so it is usually not considered to be a part of computer science.'
+            },
+            {
+            question: 'Where would you put Machine Learning?',
+                correctAnswer: 'correct',
+                description: 'Machine learning is usually considered to be a part of AI.',
+                        },
+            {
+            question: 'Where would you put Computer Science',
+                correctAnswer: 'correct',
+                description: 'Computer science is a relatively broad field that includes AI but also other subfields such as distributed computing, human-computer interaction, and software engineering.',           
+             },
+            {
+            question: 'Where would you put Deep Learning?',
+                correctAnswer: 'correct',
+                description: 'Deep learning is a part of machine learning',
+            }
+            // Add more objects for each question with their correct answers and descriptions
+        ];
+
+        let correctCount = 0;
+        const answerElements = document.querySelectorAll('.answer');
+        const optionsContainers = document.querySelectorAll('.options');
+
+        for (let i = 0; i < selectedAnswers.length; i++) {
+            const answer = selectedAnswers[i];
+            const answerElement = answerElements[i];
+            const options = optionsContainers[i].querySelectorAll('.option');
+            const currentQuestionData = quizData[i];
+
+            if (answer === currentQuestionData.correctAnswer) {
+                correctCount++;
+                answerElement.textContent = 'Correct :)';
+                answerElement.style.color = 'green';
+            } else {
+                answerElement.textContent = 'Incorrect :(';
+                answerElement.style.color = 'red';
+
+                //Find the correct option and add "correct" class to style it differently
+                options.forEach(option => {
+                    option.classList.remove('selected');
+                    if (option.textContent === 'Section ' + currentQuestionData.correctAnswer.toUpperCase()) {
+                        option.classList.add('correct');
+                    }
+                });
+
+                // Add description for incorrect answer
+                const descriptionElement = document.createElement('p');
+                descriptionElement.textContent = currentQuestionData.description;
+                descriptionElement.style.fontWeight = 'bold';
+                descriptionElement.style.color = 'green';
+                answerElement.appendChild(descriptionElement);
+            }
+        }
+
+        // Display the overall score
+        const overallScore = `You answered ${correctCount} out of ${quizData.length} questions correctly.`;
+        const overallScoreElement = document.createElement('p');
+        overallScoreElement.textContent = overallScore;
+        answerElements[answerElements.length - 1].appendChild(overallScoreElement);
+    }
+</script>
+<script src="{% static 'js/script.js' %}"></script>
+</html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+{%load static%}
+<html>
+<head>
+    <title>Understanding k-Nearest Neighbors (KNN)</title>
+    <style>
+  body {
+  font-family: Arial, sans-serif;
+  background-color: #f7f7f7;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+
+h1 {
+  text-align: center;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+button {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.result {
+  margin-top: 20px;
+  font-weight: bold;
+}
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f7f7f7;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+
+h1 {
+  text-align: center;
+}
+
+h3 {
+  margin-top: 20px;
+}
+
+input[type="submit"] {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+.result {
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.header {
+      padding: 20px;
+      text-align: center;
+      background: #ffffff;
+      color: rgb(209, 162, 162);
+      font-size: 10px;
+    }
+
+   
+    .main-content {
+      margin-left: 200px; /* Adjusted to move the main content to the right, next to the sidebar */
+      padding: 0px 10px;
+    }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Understanding k-Nearest Neighbors (KNN) - A Simple Yet Powerful Machine Learning Algorithm</h1>
+      </div>   
+      
+    
+      <div class="main-content">
+        
+<h1>Understanding k-Nearest Neighbors (KNN) - A Simple Yet Powerful Machine Learning Algorithm</h1>
+
+<h2>Introduction</h2>
+<p>
+    K-nearest neighbors is a supervised machine learning technique used for both classification and regression tasks. It operates by identifying the k closest training examples in the feature space to a given data point. The prediction made depends on whether it's used for classification or regression. In classification, it assigns a label to the data point based on the majority class among its k nearest neighbors. In regression, it predicts a value by averaging the values of the k closest neighbors. The value of k, a positive integer, is crucial in this approach, with smaller values like 3 or 5 often preferred in practice. The "K" in K-nearest neighbors signifies the number of neighboring items used in the prediction process, depending on whether it's a classification or regression problem. The diagram below illustrates the process of utilizing K-nearest neighbors for making predictions.
+    
+</p>
+<img src="{%static 'images/knn.png'%}" />
+<h2>How does KNN Work?</h2>
+<p>
+    There are two main phases in the KNN algorithm:
+</p>
+<ol>
+    <li>
+        <strong>Training phase:</strong> Unlike many other machine learning algorithms, KNN doesn't actually 'learn' anything in this phase. It simply stores all the data points and their corresponding labels from the training set.
+    </li>
+    <li>
+        <strong>Prediction phase:</strong> Given a new, unseen instance, the KNN algorithm identifies the 'k' instances in the training set that are closest to the new instance (hence the name k-nearest neighbors). The closeness is determined by a distance metric, commonly the Euclidean distance.
+        <ul>
+            <li>In a <strong>classification problem</strong>, the new instance is assigned the class that is most common among its 'k' nearest neighbors.</li>
+            <li>In a <strong>regression problem</strong>, the predicted output could be the average of the values of the 'k' nearest neighbors.</li>
+        </ul>
+    </li>
+</ol>
+
+<h2>Key Aspects of KNN</h2>
+<ol>
+    <li><strong>Choice of 'k':</strong> The number of neighbors to consider, 'k', is a user-defined constant. Different values of 'k' may result in different predictions. A small value of 'k' makes the model more sensitive to noise, whereas a large 'k' can smooth over some of the finer details of the data.</li>
+    <li><strong>Distance Metric:</strong> The distance metric used to measure closeness can significantly impact the algorithm's performance. Commonly used metrics include Euclidean distance, Manhattan distance, and Minkowski distance.</li>
+    <li><strong>Feature Scaling:</strong> KNN is sensitive to the scale of the features. If one feature has a much larger scale than others, it can dominate the distance calculation. Therefore, feature scaling is often used prior to applying KNN.</li>
+</ol>
+
+<h2>Applications of KNN</h2>
+<p>
+    Despite its simplicity, KNN is a versatile algorithm used in a wide array of applications, from recommender systems and image recognition to economic forecasting and genetics. Its simplicity, coupled with its effectiveness, makes KNN a good benchmark for more complex classifiers like Artificial Neural Networks (ANN) and Support Vector Machines (SVM).
+</p>
+
+<div class="container">
+    <h1>Next Purchase Prediction with K-NN</h1>
+    <p>We have data from six users. For each user, we have recorded their recent shopping history of four items and the item they bought after buying these four items:</p>
+   <p>
+    The most recent purchase is the one in the rightmost column, so for example, after buying a t-shirt, flip flops, sunglasses, and Moby Dick (novel), Ville bought sunscreen. Our hypothesis is that after buying similar items, other users are also likely to buy sunscreen.
+
+To apply the nearest neighbor method, we need to define what we mean by nearest. This can be done in many different ways, some of which work better than others. Let’s use the shopping history to define the similarity (“nearness”) by counting how many of the items have been purchased by both users.
+   </p>
+    <table id="customersTable">
+      <tr>
+        <th>User</th>
+        <th>Shopping History</th>
+        <th>Purchase</th>
+      </tr>
+      <tr>
+        <td>Alice</td>
+        <td>sneakers, headphones, t-shirt, jeans</td>
+        <td>running shoes</td>
+      </tr>
+      <tr>
+        <td>Bob</td>
+        <td>sunglasses, t-shirt, shorts</td>
+        <td>flip flops</td>
+      </tr>
+      <tr>
+        <td>Charlie</td>
+        <td>t-shirt, hoodie, jeans, sneakers</td>
+        <td>hoodie</td>
+      </tr>
+      <tr>
+        <td>David</td>
+        <td>headphones, t-shirt, jeans</td>
+        <td>running shoes</td>
+      </tr>
+      <tr>
+        <td>Eve</td>
+        <td>t-shirt, jeans, sunglasses, hat</td>
+        <td>flip flops</td>
+      </tr>
+      <tr>
+        <td>Frank</td>
+        <td>sneakers, hoodie, jeans, t-shirt</td>
+        <td>running shoes</td>
+      </tr>
+    </table>
+<p>Our task is to predict the next purchase of customer Travis who has bought the following products:</p>
+    <h2>Travis's Shopping History</h2>
+
+    <table id="customersTable">
+        <tr>
+          <th>User</th>
+          <th>Shopping History</th>
+          <th>Purchase</th>
+        </tr>
+        <tr>
+            <td>Travis</td>
+            <td>t-shirt, jeans, sunglasses</td>
+            <td>?</td>
+          </tr>
+        </table>
+<p>You can think of Travis being our test data, and the above six users make our training data.</p>
+<div>
+    <p><strong>Proceed as follows</strong></p>
+ <ul>
+    <li>Calculate the similarity of Travis relative to the six users in the training data (done by adding together the number of similar purchases by the users).</li>
+<li>Having calculated the similarities, identify the user who is most similar to Travis by selecting the largest of the calculated similarities.</li>
+<li>Predict what Travis is likely to purchase next by looking at the most recent purchase (the rightmost column in the table) of the most similar user from the previous step.</li>
+</ul>
+</div>
+    
+  </div>
+  <form id="quizForm">
+    <h3>Question 1:</h3>
+    <p>Who is the user most similar to Travis?</p>
+    <input type="text" name="q1" id="q1Answer" placeholder="Enter your answer">
+
+    <div id="q1Result" class="result"></div>
+   
+    <h3>Question 2:</h3>
+    <p>What is the predicted purchase for Travis?</p>
+    <input type="text" name="q2" id="q2Answer" placeholder="Enter your answer">
+
+    <div id="q2Result" class="result"></div>
+    <input type="submit" value="Submit">
+  </form>
+
+  <div id="totalScore" class="result"></div>
+    <!-- Quiz result will be displayed here -->
+  </div>
+</div>
+</div>
+</body>
+<script>
+ document.getElementById("quizForm").onsubmit = function (event) {
+  event.preventDefault();
+
+  // Get user answers
+  const q1Answer = document.getElementById("q1Answer").value.trim().toLowerCase();
+  alert(q1Answer)
+  const q2Answer = document.getElementById("q2Answer").value.trim().toLowerCase();
+
+  // Check user answers
+  const correctAnswers = {
+    q1: "david",
+    q2: "running shoes",
+  };
+
+  let score = 0;
+
+  // Display the result for Question 1
+
+  // Display the result for Question 2
+  const q1ResultDiv = document.getElementById("q1Result");
+  if (q1Answer !== "") {
+    if (q1Answer === correctAnswers.q1.toLowerCase()) {
+      score++;
+      q1ResultDiv.innerHTML = "Correct!";
+      q1ResultDiv.classList.add("correct");
+    } else {
+      q1ResultDiv.innerHTML = `Wrong! The correct answer is: ${correctAnswers.q1}`;
+      q1ResultDiv.classList.add("wrong");
+    }
+  } else {
+    q1ResultDiv.innerHTML = "Please enter your answer.";
+    q1ResultDiv.classList.remove("correct", "wrong");
+  }
+
+  // Display the result for Question 2
+  const q2ResultDiv = document.getElementById("q2Result");
+  if (q2Answer !== "") {
+    if (q2Answer === correctAnswers.q2.toLowerCase()) {
+      score++;
+      q2ResultDiv.innerHTML = "Correct!";
+      q2ResultDiv.classList.add("correct");
+    } else {
+      q2ResultDiv.innerHTML = `Wrong! The correct answer is: ${correctAnswers.q2}`;
+      q2ResultDiv.classList.add("wrong");
+    }
+  } else {
+    q2ResultDiv.innerHTML = "Please enter your answer.";
+    q2ResultDiv.classList.remove("correct", "wrong");
+  }
+
+  // Display total score
+  const totalScoreDiv = document.getElementById("totalScore");
+  totalScoreDiv.innerHTML = `You scored ${score} out of 2 questions correctly!`;
+};
+
+
+</script>
+</html>

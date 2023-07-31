@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+{%load static%}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>courses</title>
+ 
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+ 
+ <link rel="stylesheet" type="text/css" href="{% static 'style2.css'%}"> 
+</head>
+<style>
+
+/* Styling for the conversation container */
+
+
+/* Styling for the conversation container */
+.conversation {
+  max-width: 400px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+/* Styling for each individual message */
+.message {
+  margin-bottom: 10px;
+  display: flex;
+}
+
+/* Styling for messages from Person A */
+.from-person-a p {
+  background-color: #d9edf7;
+  border-radius: 15px 15px 15px 0;
+  padding: 10px 15px;
+  margin: 0;
+  align-self: flex-start;
+}
+
+/* Styling for messages from Person B */
+.from-person-b p {
+  background-color: #f1f1f1;
+  border-radius: 15px 15px 0 15px;
+  padding: 10px 15px;
+  margin: 0;
+  align-self: flex-end;
+}
+
+/* Media query for mobile layout */
+@media (max-width: 600px) {
+  .conversation {
+    max-width: 90%;
+  }
+
+  .from-person-a p,
+  .from-person-b p {
+    max-width: 70%;
+  }
+
+  /* Display messages in a stacked format */
+  .message {
+    flex-direction: column;
+  }
+
+  /* Add some spacing between stacked messages */
+  .message:not(:last-child) {
+    margin-bottom: 20px;
+  }
+}
+
+/* Hide all messages initially */
+.typing {
+  visibility: hidden;
+}
+.chat-container {
+  
+  display: flex;
+  justify-content: center;
+}
+
+.navbar a[href="{% url 'C11' %}"] {
+    background-color: #8e44ad; /* Change this to the desired highlight color */
+    color: white; /* Change this to the desired font color */
+}
+.profile2 .image{
+   height: 10rem;
+   width: 10rem;
+  margin-left: 10rem;
+  margin-top: 4rem;
+   margin-bottom: 5rem;
+   border-radius: 10%;
+}
+.inline-btn2{
+    border-radius: 0.5rem;
+    color: #fff;
+    font-size: 1.8rem;
+    cursor: pointer;
+    text-transform: capitalize;
+    padding: 1rem 3rem;
+    text-align: center;
+    margin-top: 1rem;
+    display: inline-block;
+    background-color: var(--main-color);
+    right: 20px;
+    margin-left: 700px;
+}
+.inline-btn2:hover{
+   background-color: var(--black);
+   color: var(--white);
+}
+
+</style>
+<body>
+    <header class="header">
+   
+        <section class="flex">
+     
+            <a href="home.html" class="logo">AIPedia</a>
+
+    
+           <div class="icons">
+            <a href="#" class="logo"><span>Courses</span></a>
+              <div id="menu-btn" class="fas fa-bars"></div>
+              <div id="search-btn" class="fas fa-search"></div>
+              <div id="user-btn" class="fas fa-user"></div>
+              <div id="toggle-btn" class="fas fa-sun"></div>
+              
+           </div>
+     
+           <div class="profile">
+              <img src="images/pic-1.jpg" class="image" alt="">
+              <h3 class="name">{{ user.get_username }}</h3>
+              <p class="role">studen</p>
+              <a href="profile.html" class="btn">view profile</a>
+
+              <div class="flex-btn">
+                 <a href="login.html" class="option-btn">login</a>
+                 <a href="register.html" class="option-btn">register</a>
+              </div>
+           </div>
+     
+        </section>
+     
+     </header> 
+     
+<div class="side-bar">
+
+    <div id="close-btn">
+       <i class="fas fa-times"></i>
+    </div>
+ 
+    <div class="profile2">
+       
+            <img src="{% static 'images/logo.png' %}" class="image" alt="">
+            
+    </div>
+ 
+    <nav class="navbar">
+    <ul>
+       
+       <a href="{% url 'C11' %}">1.1 Introduction to AI</a>
+       <a href="{% url 'C12' %}">1.2 Definition</a>
+       <a href="{% url 'C13' %}">1.3 Related Fields</a>
+
+    </ul>
+    </nav>
+ 
+ </div>
+
+ <section class="courses">
+    <div>
+      <h1> Introduction TO AI</h1>
+   <p> Will a robot take my job? How is artificial intelligence likely to change my job in the next ten years? Where are AI technologies being used right now and where will they come next? </p>
+    </br>
+</br>
+<p>Let's take a look at the conversation about what AI really is</p>
+    </div>
+    <div class="chat-container">
+    <div class="conversation"  onclick="showFullConversation()" >
+        <div class="message from-person-a">
+          <p class="typing">Hey, have you ever heard of AI?</p>
+        </div>
+        <div class="message from-person-b">
+          <p class="typing">Yeah, AI stands for Artificial Intelligence. It's a fascinating field of study that involves creating intelligent machines or computer programs capable of simulating human-like cognitive processes.</p>
+        </div>
+        <div class="message from-person-a">
+          <p class="typing">Oh, that sounds interesting! So, what exactly does AI do?</p>
+        </div>
+        <div class="message from-person-b">
+          <p class="typing">Well, AI aims to develop systems that can perceive their environment, reason about it, learn from it, and make decisions or take actions based on that knowledge. These systems can analyze vast amounts of data, recognize patterns, and even adapt and improve their performance over time.</p>
+        </div>
+        <div class="message from-person-a">
+          <p class="typing">That's impressive! How does AI achieve all of that?</p>
+        </div>
+        <div class="message from-person-b">
+          <p class="typing">There are different approaches to AI, but a common one is machine learning. It's a technique where machines are trained on large datasets to recognize patterns and make predictions or decisions based on that data. They learn from examples rather than being explicitly programmed for specific tasks.</p>
+        </div>
+        <div class="message from-person-a">
+            <p class="typing">So, like self-driving cars or voice assistants?'</p>
+        </div>
+        <div class="message from-person-b">
+            <p class="typing">Exactly! Self-driving cars use AI algorithms to perceive the environment, understand traffic signs, and make decisions about driving. Voice assistants like Siri or Alexa utilize AI to understand and respond to human voice commands.</p>
+          </div>
+      </div>
+      </div>
+ </section>
+ <form method="post">
+    {% csrf_token %}
+    <!-- Your existing content for chapter C11 -->
+
+    <!-- Add the "Next" button -->
+    <button type="submit" class="inline-btn2">Next >></button>
+</form>
+ 
+</body>
+
+<script>
+const messages = document.querySelectorAll('.typing');
+let showFull = false; // Flag to keep track of full conversation display
+
+function typeWriter(index) {
+  if (showFull) return; // If the full conversation is shown, stop typing
+
+  const message = messages[index];
+  const text = message.innerHTML;
+  message.innerHTML = '';
+  message.style.visibility = 'visible'; // Show the current message
+
+  let i = 0;
+  const typingInterval = setInterval(function () {
+    if (showFull) {
+      clearInterval(typingInterval);
+      message.innerHTML = text; // Display the entire message instantly
+      if (index < messages.length - 1) {
+        typeWriter(index + 1); // Move to the next message after a short delay
+      }
+      return;
+    }
+
+    if (i < text.length) {
+      message.innerHTML += text.charAt(i);
+      i++;
+    } else {
+      clearInterval(typingInterval);
+      if (index < messages.length - 1) {
+        setTimeout(function () { // Hide the current message
+          typeWriter(index + 1); // Move to the next message after a short delay
+        }, 100);
+      } else {
+        // If all messages are typed, add click event listener to show the full conversation
+        const conversation = document.querySelector('.conversation');
+        conversation.addEventListener('click', showFullConversation);
+      }
+    }
+  }, 20);
+}
+
+function showFullConversation() {
+  showFull = true; // Set the flag to true to stop the typewriter effect
+  messages.forEach((message) => {
+    message.style.visibility = 'visible'; // Show all messages instantly
+  });
+}
+
+typeWriter(0); // Start typing the first message
+
+</script>
+<script src="{% static 'js/script.js' %}"></script>
+</html>

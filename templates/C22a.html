@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+{%load static%}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>courses</title>
+ 
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'style2.css'%}"> 
+    <style>
+ 
+
+.navbar a[href="{% url 'C21' %}"] {
+    background-color: #8e44ad; /* Change this to the desired highlight color */
+    color: white; /* Change this to the desired font color */
+}
+.profile2 .image{
+   height: 10rem;
+   width: 10rem;
+  margin-left: 10rem;
+  margin-top: 4rem;
+   margin-bottom: 5rem;
+   border-radius: 10%;
+}
+
+/* Add your CSS animations here, e.g., for hovering on section elements */
+
+.container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #212529;
+        }
+        p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-top: 0.4em;
+        }
+        circle {
+            fill: red;
+        }
+
+        line {
+            stroke: black;
+            stroke-width: 2;
+        }
+
+        text {
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+        }
+        circle {
+            fill: red;
+        }
+
+        line {
+            stroke: black;
+            stroke-width: 2;
+        }
+
+        #pathTable {
+            margin-top: 10px;
+            border-collapse: collapse;
+        }
+
+        #pathTable td, #pathTable th {
+            border: 1px solid black;
+            padding: 5px;
+        }
+
+        .shortest {
+            background-color: #90ee90; /* light green */
+        }
+
+        .cityLabel {
+            font-size: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .traveler {
+            fill: blue;
+        }
+        .TVS{
+            
+            justify-content: center;
+        }
+ </style>
+</head>
+<body>
+
+    {% for message in messages %}
+    
+
+    <div id="messageModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            {{message}}
+        
+        {% for user_badge in user.userbadge_set.all %}
+        
+            <div class="badge">
+                <img  src="{{ user_badge.badge.image.url }}" alt="{{ user_badge.badge.name }}">
+          </div>
+        </div>
+
+{% endfor %}
+    </div>
+    
+{% endfor %}
+
+<header class="header">
+   
+    <section class="flex">
+ 
+        <a href="home.html" class="logo">AIPedia</a>
+
+
+       <div class="icons">
+        <a href="#"><i class="fas fa-graduation-cap"></i><span>Courses</span></a>
+          <div id="menu-btn" class="fas fa-bars"></div>
+          <div id="search-btn" class="fas fa-search"></div>
+          <div id="user-btn" class="fas fa-user"></div>
+          <div id="toggle-btn" class="fas fa-sun"></div>
+          
+       </div>
+ 
+       <div class="profile">
+          <img src="images/pic-1.jpg" class="image" alt="">
+          <h3 class="name">{{ user.get_username }}</h3>
+          <p class="role">studen</p>
+          <a href="profile.html" class="btn">view profile</a>
+
+          <div class="flex-btn">
+             <a href="login.html" class="option-btn">login</a>
+             <a href="register.html" class="option-btn">register</a>
+          </div>
+       </div>
+ 
+    </section>
+ 
+ </header> 
+ 
+<div class="side-bar">
+
+<div id="close-btn">
+   <i class="fas fa-times"></i>
+</div>
+
+<div class="profile2">
+   
+        <img src="{% static 'images/logo.png' %}" class="image" alt="">
+        
+</div>
+
+<nav class="navbar">
+
+   <ul>
+    <li>
+   <a href="{% url 'C21' %}">2.1 Turing Test</a>
+   <a href="{% url 'C22' %}">2.2 AI Problem Solving</a>
+    <ul>
+        <li><a href="{% url 'C22a' %}">Sub Topic</a></li>
+    </ul>
+   
+   <a href="{% url 'C23' %}">2.3 Search and Games</a>
+</li>
+</ul>
+
+</nav>
+
+</div>
+
+<section class="courses">
+    <div class="container">
+        <h1>Search in Practice: Getting from A to B</h1>
+        <p>Imagine you’re in a foreign city, at some address (say a hotel) and want to use public transport to get to another address (a nice restaurant, perhaps). What do you do? If you are like many people, you pull out your smartphone, type in the destination and start following the instructions.</p>
+        <p>Navigating from point A to point B is an archetypal problem in the field of artificial intelligence. This problem isn't unique to humans in foreign cities — it's a fundamental challenge faced by delivery drones, self-driving cars, and even pathfinding algorithms in video games.</p>
+        <p>In AI terms, this challenge can be mapped onto a graph problem, where every location is a node and the paths between them represent edges. The goal of the AI is to find the most optimal path from the starting node to the target node, which can be done using algorithms like A* or Dijkstra's. Factors such as the distance between nodes, the time it takes to travel, and possible obstacles have to be taken into account.</p>
+        <p>AI is not limited to simply finding the shortest path, however. With machine learning, an AI system could predict traffic congestion, consider personal preferences, or even adjust routes in real time based on newly updated information. For example, if a road becomes suddenly unavailable due to construction or an accident, a well-trained AI system would adjust the route dynamically.</p>
+        <p>This question belongs to the class of search and planning problems. Similar problems need to be solved by self-driving cars, and (perhaps less obviously) AI for playing games. In the game of chess, for example, the difficulty is not so much in getting a piece from A to B as keeping your pieces safe from the opponent.</p>
+   <img src="{% static 'images/path.svg'%}">
+        <p>Often there are many different ways to solve the problem, some of which may be more preferable in terms of time, effort, cost or other criteria. Different search techniques may lead to different solutions, and developing advanced search algorithms is an established research area.</p>
+        <img src="{% static 'images/path2.svg'%}">
+    </div>
+
+
+<div class="container">
+    <h2>Travelling Salesman Problem</h2>
+    <p>The Travelling Salesman Problem (TSP) is a classic algorithmic problem in the field of computer science and operations research. It focuses on optimization. In this problem, a salesman is given a list of cities, and must determine the shortest possible route that allows him to visit each city once and return to his original location.</p>
+
+<div class="TVS">
+<svg id="citiesSVG" width="500" height="500"></svg>
+    <table id="pathTable">
+        <thead>
+            <tr>
+                <th>Path</th>
+                <th>Distance</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <button id="solveButton">Solve</button>
+</div>
+<h1>State space, transitions, and costs</h1>
+<p>To formalize a planning problem, we use concepts such as the state space, transitions, and costs.</p>
+<div class="Key">
+   <p> Key terminology</p>
+
+<h3>The state space</h3>means the set of possible situations. In the chicken-crossing puzzle, the state space consisted of ten allowed states NNNN through to FFFF (but not for example NFFF, which the puzzle rules don’t allow). If the task is to navigate from place A to place B, the state space could be the set of locations defined by their (x,y) coordinates that can be reached from the starting point A. Or we could use a constrained set of locations, for example, different street addresses so that the number of possible states is limited.
+
+<h3>Transitions</h3>are possible moves between one state and another, such as NNNN to FNFN. It is important to note that we only count direct transitions that can be accomplished with a single action as transitions. A sequence of multiple transitions, for example, from A to C, from C to D, and from D to B (the goal), is a path rather than a transition.
+
+<h3>Costs</h3>refer to the fact that, oftentimes the different transitions aren’t all alike. They can differ in ways that make some transitions more preferable or cheaper (in a not necessarily monetary sense of the word) and others more costly. We can express this by associating with each transition a certain cost. If the goal is to minimize the total distance traveled, then a natural cost is the geographical distance between states. On the other hand, the goal could actually be to minimize the time instead of the distance, in which case the natural cost would obviously be the time. If all the transitions are equal, then we can ignore the costs.
+</div>
+<div class="excercise">
+    Exercise : A smaller rowboat
+    <p>In the traditional version of this puzzle the robot can only fit one thing on the boat with it. The state space is still the same, but fewer transitions are possible.</p>
+    
+    <p>Using the diagram with the possible states below as a starting point, <strong>draw the possible transitions</strong> in it (it is MUCH easier to do this with a pencil and paper than without).</p>
+    
+    <p>Having drawn the state transition diagram, find the <strong>shortest path</strong> from NNNN to FFFF, and calculate the number of transitions on it.</p>
+    
+    <p>Please type your answer as the number of transitions in the shortest path (just a single number like "12"). <strong>Do NOT include any further description</strong> of your solution. Hint: Do not count the number of states, but the number of transitions. For example, the number of transitions in the path NNNN→FFNF→NFNF→FFFF is 3 instead of 4.</p>
+
+    <img src="{%static 'images/puzzle.svg'%}"/>
+    <form method="post">
+        {% csrf_token %}
+        <div class="inputContainer">
+            Answer
+            <input name="answer" id="answer" type="text" class="input" required style="width: 400px; height: 50px; font-size: 24px;">
+
+          </div>
+          <input type="submit" class="submitBtn" onclick="submitQuiz()" value="Submit">
+
+        
+    </form>
+    <div id="feedback" class="feedback" style="height: 100px; font-size: 18px;"></div>
+
+</div>
+</section>
+</body>
+<script>
+    
+    var citiesSVG = document.getElementById('citiesSVG');
+    var pathTable = document.getElementById('pathTable');
+    var cities = [
+        {id: 'A', x: 50, y: 50},
+        {id: 'B', x: 350, y: 50},
+        {id: 'C', x: 10, y: 350},
+        {id: 'D', x: 100, y: 250}
+    ];
+    
+    // Function to calculate distance between two points
+    function distance(city1, city2) {
+        var dx = city2.x - city1.x;
+        var dy = city2.y - city1.y;
+        return Math.sqrt(dx * dx + dy * dy);
+    }
+
+    // Function to calculate total distance of a path
+    function totalDistance(path) {
+        var total = 0;
+        for (var i = 0; i < path.length - 1; i++) {
+            total += distance(path[i], path[i + 1]);
+        }
+        total += distance(path[path.length - 1], path[0]); // return to the starting city
+        return total;
+    }
+
+    // Function to generate permutations
+    function permutations(array) {
+        function p(array, index, output) {
+            if (index === array.length) {
+                output.push(_.clone(array));
+            } else {
+                for (var i = index; i < array.length; i++) {
+                    [array[index], array[i]] = [array[i], array[index]];
+                    p(array, index + 1, output);
+                    [array[index], array[i]] = [array[i], array[index]];
+                }
+            }
+        }
+
+        var output = [];
+        p(array, 0, output);
+        return output;
+    }
+
+    // Generate all permutations of the cities
+    var paths = permutations(cities);
+
+    // Find the shortest path
+    var shortestPath = _.minBy(paths, totalDistance);
+
+    // Draw the cities and their labels
+    for (var city of cities) {
+        var circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        circle.setAttribute("cx", city.x);
+        circle.setAttribute("cy", city.y);
+        circle.setAttribute("r", 5);
+        citiesSVG.appendChild(circle);
+
+        var text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        text.setAttribute("x", city.x + 10);
+        text.setAttribute("y", city.y + 5);
+        text.setAttribute("class", "cityLabel");
+        text.textContent = city.id;
+        citiesSVG.appendChild(text);
+    }
+    document.getElementById("solveButton").addEventListener("click", function solve() {
+    // Function to draw a path
+    function drawPath(path) {
+        for (var i = 0; i < path.length; i++) {
+            var line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            line.setAttribute("x1", path[i].x);
+            line.setAttribute("y1", path[i].y);
+            line.setAttribute("x2", path[(i + 1) % path.length].x);
+            line.setAttribute("y2", path[(i + 1) % path.length].y);
+            citiesSVG.appendChild(line);
+        }
+    }
+
+    // Draw the shortest path
+    drawPath(shortestPath);
+
+    // Show all paths and their distances
+    for (var path of paths) {
+        var row = pathTable.insertRow(-1);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        cell1.textContent = path.map(city => city.id).join(' -> ');
+        cell2.textContent = totalDistance(path).toFixed(2);
+        if (path === shortestPath) {
+            row.classList.add('shortest');
+        }
+    }
+
+    // Create a shape to represent the traveler
+    var traveler = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    traveler.setAttribute("r", 10);
+    traveler.setAttribute("class", "traveler");
+    citiesSVG.appendChild(traveler);
+
+    // Animate the traveler along the shortest path
+    var pathIndex = 0;
+    var interval = setInterval(function() {
+        traveler.setAttribute("cx", shortestPath[pathIndex].x);
+        traveler.setAttribute("cy", shortestPath[pathIndex].y);
+        pathIndex++;
+        if (pathIndex === shortestPath.length) {
+            pathIndex = 0; // Loop back to the beginning of the path
+        }
+    }, 1000); // Move to the next city every 2 seconds
+});
+function submitQuiz(){
+        event.preventDefault();  // Prevent form from being submitted
+
+        var answer = document.getElementById("answer").value;
+        const answerElements= document.querySelectorAll('.feedback');
+        alert(answer)
+        if(answer == "7") {
+            const descriptionElement = document.createElement('p');
+    descriptionElement.textContent = "Your answer is correct";
+    answerElements[0].appendChild(descriptionElement);
+           
+        } else {
+            if(answerElements.length > 0) {
+    const descriptionElement = document.createElement('p');
+    descriptionElement.textContent = "Incorrect. The correct answer is 7. There are two shortest paths that lead from the start NNNN to the goal FFFF. One of them is NNNN -> FNFN -> NNFN -> FFFN -> NFNN -> FFNF -> NFNF -> FFFF, and the other NNNN -> FNFN -> NNFN -> FNFF -> NNNF -> FFNF -> NFNF -> FFFF. Intuitively, the strategy is to move the chicken on the other side first, and then go back get either the fox or the feed, and take it to the far side too. The robot then takes the chicken back to the near side to save it from being eaten or from eating the feed, and takes the other remaining object (fox or feed) from the near side to the far side. Finally, the robot goes to fetch the chicken and takes it to the far side to reach the goal.";
+    answerElements[0].appendChild(descriptionElement);
+        }
+  }
+    }
+</script>
+<script src="{% static 'js/script.js' %}"></script>
+
+</html>

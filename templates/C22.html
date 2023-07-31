@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+{%load static%}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>courses</title>
+ 
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  <script src="{% static 'js/sketch.js'%}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'style2.css'%}"> 
+    <style>
+       .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7);
+}
+
+.badge-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  width: 100px; /* Adjust this if you want the badge container to be smaller or larger */
+}
+.badge img {
+  width: 100px;
+  height: 100px;
+  background-color: #658fd8;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 24px;
+  animation: bounce 1s infinite alternate;
+}
+
+@keyframes bounce {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.2);
+  }
+}
+.modal-content {
+    background-color: #f4f4f4;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    animation-name: modalopen;
+    animation-duration: 1s;
+}
+
+.close-button {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@keyframes modalopen {
+    from {opacity: 0}
+    to {opacity: 1}
+}
+@keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+@keyframes fadeOut {
+  0% {opacity: 1;}
+  100% {opacity: 0;}
+}
+
+@keyframes scale {
+  0% {transform: scale(0.9);}
+  100% {transform: scale(1);}
+}
+
+#message {
+  animation: fadeIn 0.5s, scale 0.5s;
+}
+
+#message.hide {
+  animation: fadeOut 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.navbar a[href="{% url 'C21' %}"] {
+    background-color: #8e44ad; /* Change this to the desired highlight color */
+    color: white; /* Change this to the desired font color */
+}
+.profile2 .image{
+   height: 10rem;
+   width: 10rem;
+  margin-left: 10rem;
+  margin-top: 4rem;
+   margin-bottom: 5rem;
+   border-radius: 10%;
+}
+.inline-btn2{
+    border-radius: 0.5rem;
+    color: #fff;
+    font-size: 1.8rem;
+    cursor: pointer;
+    text-transform: capitalize;
+    padding: 1rem 3rem;
+    text-align: center;
+    margin-top: 1rem;
+    display: inline-block;
+    background-color: var(--main-color);
+    right: 20px;
+    margin-left: 700px;
+}
+.inline-btn2:hover{
+   background-color: var(--black);
+   color: var(--white);
+}
+courses {
+  margin-bottom: 2rem;
+}
+
+h2 {
+  color: #333;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 0.5rem;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #333;
+  color: #fff;
+}
+
+/* Add your CSS animations here, e.g., for hovering on section elements */
+
+canvas {
+  border: 1px solid black;
+}
+h1 {
+  margin-bottom: 10px;
+}
+
+#board {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cell {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #333;
+  font-size: 18px;
+}
+
+button {
+  margin-top: 10px;
+}
+    </style>
+</head>
+<body>
+
+    {% for message in messages %}
+    
+
+    <div id="messageModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            {{message}}
+        
+        {% for user_badge in user.userbadge_set.all %}
+        
+            <div class="badge">
+                <img  src="{{ user_badge.badge.image.url }}" alt="{{ user_badge.badge.name }}">
+          </div>
+        </div>
+
+{% endfor %}
+    </div>
+    
+{% endfor %}
+
+<header class="header">
+   
+    <section class="flex">
+ 
+        <a href="home.html" class="logo">AIPedia</a>
+
+
+       <div class="icons">
+        <a href="#"><i class="fas fa-graduation-cap"></i><span>Courses</span></a>
+          <div id="menu-btn" class="fas fa-bars"></div>
+          <div id="search-btn" class="fas fa-search"></div>
+          <div id="user-btn" class="fas fa-user"></div>
+          <div id="toggle-btn" class="fas fa-sun"></div>
+          
+       </div>
+ 
+       <div class="profile">
+          <img src="images/pic-1.jpg" class="image" alt="">
+          <h3 class="name">{{ user.get_username }}</h3>
+          <p class="role">studen</p>
+          <a href="profile.html" class="btn">view profile</a>
+
+          <div class="flex-btn">
+             <a href="login.html" class="option-btn">login</a>
+             <a href="register.html" class="option-btn">register</a>
+          </div>
+       </div>
+ 
+    </section>
+ 
+ </header> 
+ 
+<div class="side-bar">
+
+<div id="close-btn">
+   <i class="fas fa-times"></i>
+</div>
+
+<div class="profile2">
+   
+        <img src="{% static 'images/logo.png' %}" class="image" alt="">
+        
+</div>
+
+<nav class="navbar">
+
+   <ul>
+    <li>
+   <a href="{% url 'C21' %}">1.1 Turing Test</a>
+   <a href="{% url 'C22' %}">1.2 AI Problem Solving</a>
+    <ul>
+        <li><a href="{% url 'C22a' %}">Sub Topic</a></li>
+    </ul>
+   
+   <a href="{% url 'C13' %}">2.3 Search and Games</a>
+</li>
+</ul>
+
+</nav>
+
+</div>
+
+<section class="courses">
+    <section>
+        <video width="320" height="240" controls>
+            <source src="{% static 'video/2.mp4' %}" type="video/mp4">
+            <source src="{% static 'video/2.mp4' %}" type="video/ogg">
+          Your browser does not support the video tag.
+          </video>
+       
+    </section>
+    <section>
+        <h2>Search and Optimization</h2>
+        <p>
+            For example, in a chess game, an AI might be tasked with finding the best next move. The AI could model this as a search problem, where the solution space is all possible sequences of moves, and the goal is to find a sequence that leads to a win. Each move can be considered as a branching point leading to another set of possible moves. The AI can use techniques such as minimax, a recursive algorithm for decision making, and alpha-beta pruning, which reduces the number of branches that need to be explored, to optimize the search. 
+        </p>
+      </section>
+      <section>
+        <h2>Logic and Rule-based Systems</h2>
+        <p>
+            Let's take the example of an expert system for medical diagnosis. These systems are fed a database of knowledge about symptoms, diseases, and their relationships. When a patient's symptoms are entered into the system, it uses a set of rules to infer possible diseases. For instance, it might have rules like "if the patient has a fever and a rash, they may have measles". This inference is typically done using methods from formal logic.
+        </p>
+      </section>
+      <section>
+        <h2>Machine Learning</h2>
+        <p>
+            An example of a machine learning approach is a recommendation system like those used by Netflix or Amazon. These systems are trained on data about past user behavior - for example, what movies a user has watched and how they rated them. The system can then learn patterns in this data, such as "people who liked movie A also tended to like movie B", and use these patterns to recommend movies to users. This can be done using techniques like collaborative filtering or deep learning.</p>
+      </section>
+      <section>
+        <h2>Probabilistic Reasoning</h2>
+        <p>
+            A great example of probabilistic reasoning can be found in natural language processing, specifically in speech recognition. Given an audio signal, a speech recognition system's task is to convert this into a written transcript. The same sound can often correspond to multiple different words, so the system has to estimate the probability of each possible word given the sound and the context. This is typically done using Hidden Markov Models or neural networks.
+         </p>
+      </section>
+      <section>
+        <h2>Multi-agent Systems</h2>
+        <p>
+            As an example, consider the problem of coordinating a fleet of drones for delivery. Each drone is an agent and they need to cooperate to deliver packages to different locations in the most efficient way possible. This involves sharing information about their current locations, the locations of the packages, and the destinations. The drones might use a combination of optimization algorithms to plan their routes and communication protocols to coordinate their actions and avoid collisions.
+          </p>
+      </section>
+    
+
+</section>
+<section>
+    
+</section>
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+
+var modal = document.getElementById("messageModal");
+var span = document.getElementsByClassName("close-button")[0];
+
+// Open the modal
+modal.style.display = "block";
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+</script>
+<script src="{% static 'js/script.js' %}"></script>
+
+</html>

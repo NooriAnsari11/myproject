@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Understanding Bayes' Theorem</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px;
+            background-color: #008CBA;
+            color: white;
+        }
+
+        .card {
+            width: 80%;
+            margin: 20px auto;
+            border: 1px solid #ddd;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            padding: 20px;
+            background-color: white;
+        }
+        
+        .card h2 {
+            color: #008CBA;
+        }
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+            width: 40%;
+            max-width: 800px;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px auto;
+            border-left: 5px solid #333;
+        }
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
+        .container {
+            padding: 2px 16px;
+        }
+        h3, p {
+            margin: 10px 0;
+        }
+        #results {
+            color: green;
+            margin-top: 20px;
+        }
+        .explanation {
+            color: red;
+            margin-top: 10px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 20%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Understanding Bayes' Theorem</h1>
+    </div>
+
+    <div class="card">
+        <h2>What is Bayes' Theorem?</h2>
+        <p>Bayes' Theorem, named after Thomas Bayes, is a mathematical formula used in probability theory and statistics to calculate the likelihood of an event based on the prior knowledge of conditions that might be related to the event. In other words, it gives us a way to update our beliefs based on the arrival of new, relevant pieces of evidence.</p>
+        <p>The theorem is stated mathematically as the following equation:</p>
+        <code>P(A|B) = [P(B|A) * P(A)] / P(B)</code>
+        <p>where:</p>
+        <ul>
+            <li>P(A|B) is the conditional probability of event A given event B, and is known as the posterior probability.</li>
+            <li>P(B|A) is the conditional probability of event B given event A.</li>
+            <li>P(A) and P(B) are the independent probabilities of A and B.</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>Example of Bayes' Theorem</h2>
+        <p>Let's consider a real-world example. Assume we have a bag containing 30 green balls and 20 red balls. If we want to find out the probability that a ball drawn at random is green (Event A), that's pretty straightforward - it's just the number of green balls divided by the total number of balls. But suppose we also know that the ball is glowing in the dark, and that 90% of green balls and only 10% of red balls glow in the dark (Event B).</p>
+        <p>Bayes' Theorem allows us to use this additional information to update our belief about whether the ball is green. We can calculate the probability that the ball is green given that it is glowing in the dark (P(Green|Glowing)) using Bayes' Theorem:</p>
+        <p>P(Green|Glowing) = [P(Glowing|Green) * P(Green)] / P(Glowing)</p>
+    </div>
+    <div class="card">
+        <h2>Bayes' Theorem in Medical Diagnosis</h2>
+        <p>Bayes' theorem is often used in the field of medical testing, where false positives and negatives can significantly impact a diagnosis. Let's consider an example involving heart disease.</p>
+        <p>Let's say, there's a test for heart disease that's 90% accurate - meaning if you have heart disease (Event A), it will correctly state you have heart disease 90% of the time (P(Positive result | Heart Disease) = 0.9). But, if you don't have heart disease (Event B), it will incorrectly say you have heart disease 10% of the time. In the population, about 0.5% of people have heart disease.</p>
+        <p>If you took the test and got a positive result, you might think you have a 90% chance of having heart disease. But, using Bayes' theorem, we can find out the actual probability of having heart disease given a positive test result.</p>
+        <p>By applying Bayes' theorem:</p>
+        <code>P(Heart Disease | Positive Result) = [P(Positive Result | Heart Disease) * P(Heart Disease)] / P(Positive Result)</code>
+        <p>The value of P(Positive Result) can be calculated as:</p>
+        <code>P(Positive Result) = P(Heart Disease) * P(Positive Result | Heart Disease) + P(No Heart Disease) * P(Positive Result | No Heart Disease)</code>
+        <p>Once these values are calculated, they can be plugged into the original formula to get the posterior probability. This calculation can give a significantly different result than the perceived 90% chance, emphasizing the importance of considering prior probabilities and the true effectiveness of the test.</p>
+    </div>
+    
+    <div class="card">
+        <h2>Importance in AI and Machine Learning</h2>
+        <p>Bayes' theorem is a foundational element of any course on probability, and its implications extend to many practical applications, including artificial intelligence and machine learning. Bayesian inference, based on Bayes’ theorem, is a method of statistical inference in which Bayes' theorem is used to update the probability for a hypothesis as evidence is acquired.</p>
+        <p>In machine learning, it can be used for creating probabilistic models. Bayesian classifiers such as Naive Bayes classifiers are very common in machine learning applications. Additionally, Bayes' theorem is also a principle behind a very popular optimization algorithm called the Bayes' theorem algorithm.</p>
+        <p>It allows us to incorporate our prior beliefs, and update them as we gather more data, leading to better long-term predictions. Thus, it's an essential concept in understanding machine learning and AI.</p>
+    </div>
+    <h3>Exercise</h3>
+    <p>A diagnostic test for a rare disease is said to be 98% accurate. If a patient has the disease, the test will return a positive result with 98% probability. Similarly, if a patient does not have the disease, the test will return a negative result with 98% probability. If 0.5% of the population has the disease and a patient tests positive, what is the probability they actually have the disease?</p>
+    <form id="exercise">
+        <input type="text" id="answer" placeholder="Enter your answer in decimal form">
+        <button type="button" onclick="checkAnswer()">Check Answer</button>
+    </form>
+    <div id="result"></div>
+    </body>
+    <script>
+        function checkAnswer() {
+            var answer = document.getElementById('answer').value;
+            var correctAnswer = 0.196;
+            if (Math.abs(answer - correctAnswer) < 0.01) {
+                document.getElementById('result').innerHTML = "<p class='correct'>Correct! The probability is approximately 0.196 or 19.6%</p>";
+            } else {
+                document.getElementById('result').innerHTML = "<p class='incorrect'>Incorrect. The correct answer is approximately 0.196 or 19.6%. Remember to use Bayes' Theorem and consider both the prior probability and the likelihood of a false positive.</p>";
+            }
+        }
+    </script>
+    </html>
