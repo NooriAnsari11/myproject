@@ -2,7 +2,9 @@ asgiref==3.7.2
 dj-database-url==2.0.0
 Django==4.2.3
 django-cors-headers==4.2.0
+gunicorn==21.2.0
 numpy==1.25.1
+packaging==23.1
 Pillow==10.0.0
 psycopg2-binary==2.9.6
 scipy==1.11.1
