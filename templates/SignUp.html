@@ -130,27 +130,27 @@ h5{
       <h1 class="title">Sign up</h1>
 
       <div class="inputContainer">
-        <input name="username" id="username" type="text" class="input" placeholder="a">
+        <input name="username" id="username" type="text" class="input" placeholder="a" required>
         <label for="" class="label">Username</label>
       </div>
 
       <div class="inputContainer">
-        <input name="email" id="email" type="text" class="input" placeholder="a">
+        <input name="email" id="email" type="text" class="input" placeholder="a" required>
         <label for="" class="label">Email</label>
       </div>
 
       <div class="inputContainer">
-        <input name="password" id="password" type="text" class="input" placeholder="a">
+        <input name="password" id="password" type="text" class="input" placeholder="a" required>
         <label for="" class="label">Password</label>
       </div>
 
       <div class="inputContainer">
-        <input  name="cpass" id="cpass" type="text" class="input" placeholder="a">
+        <input  name="cpass" id="cpass" type="text" class="input" placeholder="a" required>
         <label for="" class="label">Confirm Password</label>
       </div>
       <div class="inputContainer">
         <label for="" >Choose Avatar</label>
-      <input type="file" name="avatar" accept="image/*">
+      <input type="file" name="avatar" accept="image/*" required>
     </div>
       <input type="submit" class="submitBtn" value="Sign up">
        <label class="label2">Already Signed Up!<a href="{% url 'login' %}">Login</a></label>

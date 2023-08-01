@@ -144,23 +144,29 @@ def chapter_completed(request, chapter_number):
         user_progress.save()
     return redirect('courses')
 
+from django.core.exceptions import ObjectDoesNotExist
+
 def Profile(request):
     user = request.user
-    progress = UserProgress.objects.get(user=user)
+    try:
+        progress = UserProgress.objects.get(user=user)
 
-    total_courses = 4  # replace with the actual total number of courses
-    completed_courses = sum([getattr(progress, f'course{i}_completed') for i in range(1, total_courses + 1)])  
-    completed_percentage = (completed_courses / total_courses) * 100
-    completed_percentage = round((completed_courses / total_courses) * 100)  # rounding off to the nearest integer
-    completed_percentage_str = f'{completed_percentage}%'
-    if completed_percentage < 33:
-        color = 'red'
-    elif completed_percentage < 66:
-        color = 'yellow'
-    else:
-        color = 'green'
-    return render(request, 'profile.html', {'progress': progress, 'completed_percentage': completed_percentage_str,'color': color})
-   
+        total_courses = 4  # replace with the actual total number of courses
+        completed_courses = sum([getattr(progress, f'course{i}_completed') for i in range(1, total_courses + 1)])  
+        completed_percentage = (completed_courses / total_courses) * 100
+        completed_percentage = round((completed_courses / total_courses) * 100)  # rounding off to the nearest integer
+        completed_percentage_str = f'{completed_percentage}%'
+        if completed_percentage < 33:
+            color = 'red'
+        elif completed_percentage < 66:
+            color = 'yellow'
+        else:
+            color = 'green'
+        return render(request, 'profile.html', {'progress': progress, 'completed_percentage': completed_percentage_str, 'color': color})
+    except UserProgress.DoesNotExist:
+        # Handle the case when there's no UserProgress for the current user
+        return render(request, 'profile.html', {'completed_percentage': '0%', 'color': 'red'})
+
 def C22(request):
     if request.method == 'POST':
         user = request.user
