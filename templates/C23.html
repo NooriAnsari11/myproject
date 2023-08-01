@@ -12,7 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="{% static 'style2.css'%}"> 
+    <link rel="stylesheet" type="text/css" href="{% static 'style3.css'%}"> 
     <style>
  
 
@@ -66,7 +66,7 @@
     }
 
     body {
-      background: #e3bdbd;
+      background: #eee;;
       
     }
     .player {
@@ -98,6 +98,79 @@ ol {
 li {
   margin-bottom: 10px;
 }
+
+.ML{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    padding: 40px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+.key
+{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    padding: 20px;
+  
+}
+h1,h2,h3 {
+            text-align: center;
+            color: #212529;
+            font-family:cursive;
+            font-size: 20px;
+        }
+        p {
+            font-size: 14px;
+            line-height: 1.6;
+            margin-top: 0.4em;
+        }
+
+        .algorithm-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #cfb6b6;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.algorithm-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.steps {
+    list-style: decimal;
+    padding-left: 20px;
+}
+
+.containerv{
+   display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.submitBtn
+{
+    border-radius: 0.5rem;
+    color: #fff;
+    font-size: 1.8rem;
+    cursor: pointer;
+    text-transform: capitalize;
+    padding: 1rem 3rem;
+    text-align: center;
+    margin-top: 1rem;
+    display: inline-block;
+    background-color: var(--main-color);
+    right: 20px;
+    margin-left: 600px;
+}
+.submitBtn:hover{
+   background-color: var(--black);
+   color: var(--white);
+}
  </style>
 </head>
 <body>
@@ -124,76 +197,45 @@ li {
 
 <header class="header">
    
-    <section class="flex">
- 
-        <a href="home.html" class="logo">AIPedia</a>
+  <section class="flex">
+
+      <a href="{% url 'index'%}" class="logo">AIPedia</a>
 
 
-       <div class="icons">
-        <a href="#"><i class="fas fa-graduation-cap"></i><span>Courses</span></a>
-          <div id="menu-btn" class="fas fa-bars"></div>
-          <div id="search-btn" class="fas fa-search"></div>
-          <div id="user-btn" class="fas fa-user"></div>
-          <div id="toggle-btn" class="fas fa-sun"></div>
-          
-       </div>
- 
-       <div class="profile">
-          <img src="images/pic-1.jpg" class="image" alt="">
-          <h3 class="name">{{ user.get_username }}</h3>
-          <p class="role">studen</p>
-          <a href="profile.html" class="btn">view profile</a>
-
-          <div class="flex-btn">
-             <a href="login.html" class="option-btn">login</a>
-             <a href="register.html" class="option-btn">register</a>
-          </div>
-       </div>
- 
-    </section>
- 
- </header> 
- 
-<div class="side-bar">
-
-<div id="close-btn">
-   <i class="fas fa-times"></i>
-</div>
-
-<div class="profile2">
-   
-        <img src="{% static 'images/logo.png' %}" class="image" alt="">
+     <div class="icons">
+      <a href="{% url 'courses'%}" class="logo"><span>Courses</span></a>
+        <div id="menu-btn" class="fas fa-bars"></div>
+        <div id="search-btn" class="fas fa-search"></div>
+        <div id="user-btn" class="fas fa-user"></div>
+        <div id="toggle-btn" class="fas fa-sun"></div>
         
-</div>
+     </div>
 
-<nav class="navbar">
+     <div class="profile">
+        <img src="{{ user.userprofile.avatar.url }}" class="image" alt="">
+        <h3 class="name">{{ user.get_username }}</h3>
+        <p class="role">student</p>
+        <a href="{% url 'Profile'%}" class="btn">view profile</a>
 
-   <ul>
-    <li>
-   <a href="{% url 'C21' %}">2.1 Turing Test</a>
-   <a href="{% url 'C22' %}">2.2 AI Problem Solving</a>
-    <ul>
-        <li><a href="{% url 'C22a' %}">Sub Topic</a></li>
-    </ul>
-   
-   <a href="{% url 'C23' %}">2.3 Search and Games</a>
-</li>
-</ul>
+        <div class="flex-btn">
+           <a href="{% url 'logout'%}" class="option-btn">Logout</a>
+           
+        </div>
+     </div>
 
-</nav>
+  </section>
 
-</div>
-
+</header> 
+ 
 <section class="courses">
     <div class="container">
         <div class="lesson">
           <h1>  Search and games</h1>
             <p>In this section, we will study a classic AI problem: games. The simplest scenario, which we will focus on for the sake of clarity, are two-player, perfect-information games such as tic-tac-toe and chess.</p>
-            <h3>Example: playing tic tac toe</h3>     
+            <h3>Example: playing tic tac toe</h3> 
+            <p class="ML"> "Play Tic Tac Toe with an intelligent AI opponent! Take turns to place your 'X' on the board and see if you can outsmart the AI's 'O'. Good luck!"</p>    
         </div>
-        <div class="header">
-          <span>Tic Tac Toe!</span>
-        </div>
+        
         <div class="container">
           <div id="description"></div>
         </div>
@@ -203,25 +245,35 @@ li {
     <div>
     
        <h1>Game Trees in AI</h1>
-    <p>
+    <p class="key">
       Game trees are an essential concept in artificial intelligence (AI) and are particularly used in the study of games and decision-making.
       A game tree is a graphical representation of all possible moves and outcomes in a sequential, turn-based, or concurrent game. It allows AI algorithms to explore and analyze different moves, strategies, and potential outcomes to make intelligent decisions.
     </p>
     <h2>How Game Trees Work</h2>
-    <ol>
+    <div class="algorithm-container">
+    <ol class="inner-steps">
       <li>Representation: A game tree starts with a root node, which represents the current state of the game. From the root, branches extend to child nodes, representing possible moves that a player can make. Each child node, in turn, becomes the root of a sub-tree representing the game state after that particular move has been made.</li>
       <li>Levels: The depth of the tree corresponds to the number of moves made in the game. Each level of the tree represents a specific player's turn, and the branches at that level represent the different moves that player can make.</li>
       <li>Leaf nodes: The game tree continues expanding until reaching an end state, which is typically represented by leaf nodes. These are terminal states of the game where no further moves are possible. At a leaf node, the game's outcome is evaluated, usually with a numerical value representing the game's utility or score.</li>
       <li>Minimax algorithm: One of the most common algorithms used to analyze game trees is the minimax algorithm. It is a recursive algorithm that evaluates each leaf node's utility value and propagates this information back up the tree to the root node, considering the best moves for each player. The idea is to maximize the player's gains while minimizing the opponent's gains.</li>
       <li>Pruning: Game trees can grow exponentially in size, especially in complex games like chess or Go. To handle this complexity, techniques like alpha-beta pruning are employed to eliminate branches that are guaranteed to be irrelevant to the final decision, thus reducing the search space and speeding up the algorithm's performance.</li>
     </ol>
+    </div>
+    <p class="key">Watch Below video to get to know Minimax Algorithm in detail.</p>
+    <div class="containerv">
+
     <iframe width="700" height="315" src="https://www.youtube.com/embed/KU9Ch59-4vw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-     
+  </div>
     </div>
       <form method="post">
-        <label for="message">Discuss the result of the game played above and how the Minimax algorithm ensured that the AI made optimal moves throughout the game. Explain why the AI was unbeatable and how the Minimax algorithm works to maximize the AI's chances of winning or achieving a draw.(Your answer will be reviewed less than 200 words.)</label>
+        {% csrf_token %}
+        <!-- Your existing content for chapter C11 -->
+      
+        <!-- Add the "Next" button -->
+        <button type="submit" class="submitBtn" id="next" >Next Section >></button>
+      <!-- <p class="ML">Discuss the result of the game played above and how the Minimax algorithm ensured that the AI made optimal moves throughout the game. Explain why the AI was unbeatable and how the Minimax algorithm works to maximize the AI's chances of winning or achieving a draw.(Your answer will be reviewed and notify result later)</p>
       </br>
-        <textarea id="message" name="message" rows="4" cols="50"></textarea>
+        <textarea id="message" name="message" rows="4" cols="50"></textarea>--> 
         
       </form>
 </section>

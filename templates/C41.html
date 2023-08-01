@@ -1,108 +1,201 @@
 <!DOCTYPE html>
+{%load static%}
 <html>
 <head>
   <title>Introduction to Machine Learning</title>
-  <link rel="stylesheet" type="text/css" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+<script src="{% static 'js/sketch.js'%}"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'style3.css'%}"> 
   <!-- Include other libraries as needed, e.g., D3.js -->
-  <style>
-    body {
-        font-family: Arial, sans-serif;
-    }
-    h2 {
-        color: #2F4F4F;
-    }
-    p {
-        text-indent: 50px;
-        text-align: justify;
-        
-    }
-    .example {
-        background-color: #F5F5F5;
-        padding: 20px;
-        margin: 20px 0;
-        border-radius: 5px;
-    }
-    .scenario {
-            background-color: #F5F5F5;
+ <style>
+        h1,h3,h2{
+  text-align: center;
+  margin-top: 20px;
+  font-size: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: rgb(7, 7, 7);
+}
+.key
+{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    padding: 10px;
+}
+.key2
+{
+    font-family:cursive;
+    font-size: 16px;
+    padding: 10px;
+}
+ .images img{
+  margin-left:300px;
+}
+.card {
+            width: 100%;
+            margin: 20px auto;
+            border: 1px solid #ddd;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+            border-radius: 10px;
             padding: 20px;
-            margin: 20px 0;
-            border-radius: 5px;
+            background-color: white;
+            border-left: 10px solid #8e44ad;
         }
-</style>
+        
+        .card h2 {
+            color: #008CBA;
+        }
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+            width: 100%;
+            max-width: 800px;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px auto;
+            border-left: 10px solid #8e44ad;
+        }
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
+        .inline-btn2{
+    border-radius: 0.5rem;
+    color: #fff;
+    font-size: 1.8rem;
+    cursor: pointer;
+    text-transform: capitalize;
+    padding: 1rem 3rem;
+    text-align: center;
+    margin-top: 1rem;
+    display: inline-block;
+    background-color: var(--main-color);
+    right: 20px;
+    margin-left: 700px;
+}
+.inline-btn2:hover{
+   background-color: var(--black);
+   color: var(--white);
+}
+ </style>
 </head>
 <body>
-  <header>
+    <header class="header">
+   
+        <section class="flex">
+     
+            <a href="{% url 'index'%}" class="logo">AIPedia</a>
+
+    
+           <div class="icons">
+            <a href="{% url 'courses'%}" class="logo"><span>Courses</span></a>
+              <div id="menu-btn" class="fas fa-bars"></div>
+              <div id="search-btn" class="fas fa-search"></div>
+              <div id="user-btn" class="fas fa-user"></div>
+              <div id="toggle-btn" class="fas fa-sun"></div>
+              
+           </div>
+     
+           <div class="profile">
+              <img src="{{ user.userprofile.avatar.url }}" class="image" alt="">
+              <h3 class="name">{{ user.get_username }}</h3>
+              <p class="role">student</p>
+              <a href="{% url 'Profile'%}" class="btn">view profile</a>
+
+              <div class="flex-btn">
+                 <a href="{% url 'logout'%}" class="option-btn">Logout</a>
+                 
+              </div>
+           </div>
+     
+        </section>
+     
+     </header>  
+     <section class="courses">
     <h1>Welcome to Machine Learning</h1>
-  </header>
+ 
 
   <section>
+
     <h2>Machine Learning?</h2>
-    <p>Machine Learning is a subset of Artificial Intelligence that provides systems the ability to learn and improve from experience without being explicitly programmed.The roots of machine learning are in statistics, which can also be thought of as the art of extracting knowledge from data. Especially methods such as linear regression and Bayesian statistics, which are both already more than two centuries old, are even today at the heart of machine learning.</p>
-    
+    <p class="key">Machine Learning is a subset of Artificial Intelligence that provides systems the ability to learn and improve from experience without being explicitly programmed.The roots of machine learning are in statistics, which can also be thought of as the art of extracting knowledge from data. Especially methods such as linear regression and Bayesian statistics, which are both already more than two centuries old, are even today at the heart of machine learning.</p>
+
     <h3>Types of Machine Learning</h3>
-    <p>The area of machine learning is often divided in subareas according to the kinds of problems being attacked. A rough categorization is as follows:</p>
-    
-    <strong>Supervised Learning:</strong>We are given an input, for example a photograph with a traffic sign, and the task is to predict the correct output or label, for example which traffic sign is in the picture (speed limit, stop sign, etc.). In the simplest cases, the answers are in the form of yes/no (we call these binary classification problems).</p>
-    
-    <strong>Unsupervised Learning:</strong>There are no labels or correct outputs. The task is to discover the structure of the data: for example, grouping similar items to form “clusters”, or reducing the data to a small number of important “dimensions”. Data visualization can also be considered unsupervised learning.</p>
-    
-    <strong>Reinforcement Learning:</strong>Commonly used in situations where an AI agent like a self-driving car must operate in an environment and where feedback about good or bad choices is available with some delay. Also used in games where the outcome may be decided only at the end of the game.</p>
-    
-    <p>The categories are somewhat overlapping and fuzzy, so a particular method can sometimes be hard to place in one category. For example, as the name suggests, so-called semisupervised learning is partly supervised and partly unsupervised.</p>
-    
+    <p class="key">The area of machine learning is often divided in subareas according to the kinds of problems being attacked. A rough categorization is as follows:</p>
+    <div class="images">
+   <p class="key2"> <strong>Supervised Learning:</strong>We are given an input, for example a photograph with a traffic sign, and the task is to predict the correct output or label, for example which traffic sign is in the picture (speed limit, stop sign, etc.). In the simplest cases, the answers are in the form of yes/no (we call these binary classification problems).</p>
+</p> 
+<img src="{%static 'images/super.webp'%}" width="500px"/>
+   <p class="key2">  <strong>Unsupervised Learning:</strong>There are no labels or correct outputs. The task is to discover the structure of the data: for example, grouping similar items to form “clusters”, or reducing the data to a small number of important “dimensions”. Data visualization can also be considered unsupervised learning.</p>
+</p> 
+<img src="{%static 'images/unsup.webp'%}" width="500px"/>
+   <p class="key2"> <strong>Reinforcement Learning:</strong>Commonly used in situations where an AI agent like a self-driving car must operate in an environment and where feedback about good or bad choices is available with some delay. Also used in games where the outcome may be decided only at the end of the game.</p>
+</p> 
+<img src="{%static 'images/rein.jpeg'%}" width="500px"/>
+    <p class="key">The categories are somewhat overlapping and fuzzy, so a particular method can sometimes be hard to place in one category. For example, as the name suggests, so-called semisupervised learning is partly supervised and partly unsupervised.</p>
+</div> 
     <div class="card">
-        Classification is a primary task in supervised machine learning where the model aims to predict the class or category of an object or event. This is done by learning from past observational data that has been labeled, meaning the class of the data is known.
+      <p class="key2">  Classification is a primary task in supervised machine learning where the model aims to predict the class or category of an object or event. This is done by learning from past observational data that has been labeled, meaning the class of the data is known.
 
 For instance, in a spam email detection task, the inputs would be the content of the email, subject line, sender's information etc., while the class or output would be whether the email is "spam" or "not spam". The machine learning model would be trained using a set of labeled emails (where it is known whether each email is spam or not), and then used to classify new, unseen emails as either spam or not.
 
 Another example is in medical imaging, where classification models could be trained to detect whether a given image contains signs of a particular disease. The input is the medical image, such as an X-ray or an MRI scan, and the classes would be "disease present" or "disease absent". After learning from a labeled dataset where it is known whether each image shows the disease or not, the model can then classify new, unseen images.
-    </div>
-
-    <h2>Supervised Learning: Humans Teaching Machines</h2>
-<p>Supervised learning is a branch of machine learning where models are trained on data that is labeled. The 'supervision' aspect comes from the fact that we are providing the model with correctly labeled examples from which it can learn.</p>
-
-<p>To elaborate, think of supervised learning as the process of an experienced teacher instructing a student. The teacher knows the correct answers and provides guidance and feedback to the student. The student learns from this feedback to improve their understanding and performance. In the same way, a supervised learning model is given labeled training data (the teacher's knowledge) and makes predictions based on that data. The model's predictions are then compared with the actual labels, and adjustments are made through an algorithm - often called an optimization algorithm - like gradient descent.</p>
-
-<div class="example">
-    <p>For example, in a classification problem such as distinguishing between emails that are 'spam' and 'not spam', the supervised learning algorithm is trained on a labeled dataset where each email is already identified as 'spam' or 'not spam'. The algorithm learns from the features associated with each category and applies this learning to classify new emails.</p>
-
-    <p>In a regression problem, like predicting the price of a house based on various features (like the number of rooms, location, size, etc.), the model is trained on historical house sales data where the actual selling price is known. The model learns the relationship between the features and the price, and uses that learning to predict the price of new, unseen houses.</p>
-
-    <p>These models continually adjust and improve their predictions over time with the goal of minimizing the error between their predictions and the actual labels. In this way, they 'learn' from the 'supervision' provided by the labeled training data.</p>
+</p>
 </div>
 
-<p>The main disadvantage of supervised learning is that it requires large amounts of labeled data, which can be time-consuming and expensive to produce. Despite this, it remains one of the most powerful and widely used forms of machine learning.</p>
+    <h2>Supervised Learning: Humans Teaching Machines</h2>
+<p class="key2">Supervised learning is a branch of machine learning where models are trained on data that is labeled. The 'supervision' aspect comes from the fact that we are providing the model with correctly labeled examples from which it can learn.</p>
+
+<p class="key2">To elaborate, think of supervised learning as the process of an experienced teacher instructing a student. The teacher knows the correct answers and provides guidance and feedback to the student. The student learns from this feedback to improve their understanding and performance. In the same way, a supervised learning model is given labeled training data (the teacher's knowledge) and makes predictions based on that data. The model's predictions are then compared with the actual labels, and adjustments are made through an algorithm - often called an optimization algorithm - like gradient descent.</p>
+
+<div class="card">
+    <p class="key2">For example, in a classification problem such as distinguishing between emails that are 'spam' and 'not spam', the supervised learning algorithm is trained on a labeled dataset where each email is already identified as 'spam' or 'not spam'. The algorithm learns from the features associated with each category and applies this learning to classify new emails.</p>
+
+    <p class="key2">In a regression problem, like predicting the price of a house based on various features (like the number of rooms, location, size, etc.), the model is trained on historical house sales data where the actual selling price is known. The model learns the relationship between the features and the price, and uses that learning to predict the price of new, unseen houses.</p>
+
+    <p class="key2">These models continually adjust and improve their predictions over time with the goal of minimizing the error between their predictions and the actual labels. In this way, they 'learn' from the 'supervision' provided by the labeled training data.</p>
+</div>
+
 
 <h2>Unsupervised Learning: Learning Without a Teacher</h2>
-<p>Unsupervised learning is a type of machine learning that finds patterns in data without needing explicitly provided labels. The 'un-supervised' part of the term comes from the fact that the algorithm isn't guided by labeled training examples, as it is in supervised learning. Instead, it independently finds patterns and structure from the input data.</p>
+<p class="key2">Unsupervised learning is a type of machine learning that finds patterns in data without needing explicitly provided labels. The 'un-supervised' part of the term comes from the fact that the algorithm isn't guided by labeled training examples, as it is in supervised learning. Instead, it independently finds patterns and structure from the input data.</p>
 
-<p>In other words, unsupervised learning is akin to a student exploring a new subject without the guidance of a teacher. The student goes through the material, tries to understand the patterns, the relations, and the rules all on their own.</p>
+<p class="key2">In other words, unsupervised learning is akin to a student exploring a new subject without the guidance of a teacher. The student goes through the material, tries to understand the patterns, the relations, and the rules all on their own.</p>
 
-<div class="example">
+<div class="card">
     <h3>Types of Unsupervised Learning</h3>
     <p><strong>Clustering</strong> is the task of grouping a set of objects in such a way that objects in the same group, or cluster, are more similar to each other than to those in other clusters. For example, consider a dataset of customers. An unsupervised learning algorithm can cluster customers based on their purchasing behavior, leading to different segments that can then be addressed with different marketing strategies.</p>
 
     <p><strong>Dimensionality reduction</strong> is the task of reducing the number of random variables under consideration, by obtaining a set of principal variables. An example of this is Principal Component Analysis (PCA), which is often used to visualize high-dimensional data in a two or three-dimensional space.</p>
 </div>
 
-<p>Unsupervised learning has the benefit that it doesn't require labeled data, which is time-consuming and expensive to produce. However, the results it produces can be more difficult to interpret, and may require more domain knowledge to understand. Despite these challenges, unsupervised learning can be very useful in exploratory data analysis, and for discovering hidden patterns in data.</p>
+<p class="key2">Unsupervised learning has the benefit that it doesn't require labeled data, which is time-consuming and expensive to produce. However, the results it produces can be more difficult to interpret, and may require more domain knowledge to understand. Despite these challenges, unsupervised learning can be very useful in exploratory data analysis, and for discovering hidden patterns in data.</p>
 
 
 <h2>Unsupervised Learning Scenario: Customer Segmentation in Marketing</h2>
-<div class="scenario">
-    <p>Suppose you're a marketing manager for an online retail company. You have access to lots of data about your customers, including their age, location, gender, frequency of purchases, average spending, browsing history on your website, etc. However, you don't know how to leverage this data to drive your marketing strategy.</p>
+<div class="card">
+    <p class="card">Suppose you're a marketing manager for an online retail company. You have access to lots of data about your customers, including their age, location, gender, frequency of purchases, average spending, browsing history on your website, etc. However, you don't know how to leverage this data to drive your marketing strategy.</p>
 
-    <p>With unsupervised learning, specifically a clustering algorithm like K-Means or Hierarchical Clustering, you can group your customers into distinct segments based on their buying patterns and other behavior.</p>
+    <p class="card">With unsupervised learning, specifically a clustering algorithm like K-Means or Hierarchical Clustering, you can group your customers into distinct segments based on their buying patterns and other behavior.</p>
 
-    <p>For example, the algorithm might identify a cluster of customers who are young, visit your website frequently and make lots of small purchases. This could be a group of impulsive buyers who are attracted to sales and discounts. A different cluster might include older, more affluent customers who make fewer but much larger purchases, possibly indicating they value quality over price.</p>
+    <p class="card">For example, the algorithm might identify a cluster of customers who are young, visit your website frequently and make lots of small purchases. This could be a group of impulsive buyers who are attracted to sales and discounts. A different cluster might include older, more affluent customers who make fewer but much larger purchases, possibly indicating they value quality over price.</p>
 
-    <p>Armed with this information, you could tailor your marketing campaigns to each customer segment, offering sales and promotions to the younger group, and highlighting the quality and exclusivity of your products to the older group. This type of targeted marketing could potentially increase your sales and customer satisfaction.</p>
+    <p class="card">Armed with this information, you could tailor your marketing campaigns to each customer segment, offering sales and promotions to the younger group, and highlighting the quality and exclusivity of your products to the older group. This type of targeted marketing could potentially increase your sales and customer satisfaction.</p>
 
-    <p>In this scenario, unsupervised learning provides a way to derive actionable insights from raw, unlabelled data.</p>
+    <p class="card">In this scenario, unsupervised learning provides a way to derive actionable insights from raw, unlabelled data.</p>
 </div>
+</section>
+<form method="post">
+    {% csrf_token %}
+    <!-- Your existing content for chapter C11 -->
+  
+    <!-- Add the "Next" button -->
+    <button type="submit" class="inline-btn2" id="next" >Next Section >></button>
+  </form>
 </body>
 </html>
   <script src="scripts.js"></script>
 </body>
+<script src="{% static 'js/script.js' %}"></script>
 </html>

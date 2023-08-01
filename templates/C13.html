@@ -10,7 +10,7 @@
     <!-- font awesome cdn link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
  
-    <link rel="stylesheet" type="text/css" href="{% static 'style2.css'%}"> 
+    <link rel="stylesheet" type="text/css" href="{% static 'style3.css'%}"> 
 </head>
 <style>
 
@@ -34,6 +34,7 @@
     font-size:16px;
     font-weight: bold;
     margin-bottom: 10px;
+    margin-left: 100px;
 }
 
 .options {
@@ -61,6 +62,7 @@
     flex-wrap: wrap;
     gap: 10px;
     justify-content: center;
+   
 }
 
 .quiz-container .option {
@@ -71,6 +73,7 @@
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s ease;
+    text-align: center;
 }
 
 .quiz-container .option:hover {
@@ -83,7 +86,7 @@
 }
 
 .quiz-container .submit-button {
-    margin-top: 10px;
+    margin-top: 20px;
     padding: 10px 20px;
     background-color: #8e44ad;;
     border: none;
@@ -92,6 +95,7 @@
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s ease;
+    margin-left: 200px;
 }
 
 .quiz-container .submit-button:hover {
@@ -102,6 +106,7 @@
     background-color: #ddd;
     cursor: not-allowed;
 }
+
 .inline-btn2{
     border-radius: 0.5rem;
     color: #fff;
@@ -114,23 +119,72 @@
     display: inline-block;
     background-color: var(--main-color);
     right: 20px;
-    margin-left: 700px;
+    margin-left: 1000px;
 }
+
 .inline-btn2:hover{
    background-color: var(--black);
    color: var(--white);
 }
+.content h1,h3
+{
+    text-align: center;
+    font-size: 30px;
+}
+.content .Intro{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    padding: 40px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+.content .ML{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    padding: 40px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+.key
+{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    padding: 20px;
+  
+}
+.card {
+            box-shadow: 0 4px 8px 0 rgba(155, 8, 8, 0.2);
+            transition: 0.3s;
+            width: 40%;
+            max-width: 800px;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px auto;
+            border-left: 10px solid #8e44ad;
+        }
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
+        .container {
+            padding: 2px 16px;
+        }
+
+        .quiz {
+    display: flex;
+    justify-content: center;
+}
+
 </style>
 <body>
     <header class="header">
    
         <section class="flex">
      
-            <a href="home.html" class="logo">AIPedia</a>
+            <a href="{% url 'index'%}" class="logo">AIPedia</a>
 
     
            <div class="icons">
-            <a href="#"><i class="fas fa-graduation-cap"></i><span>Courses</span></a>
+            <a href="{% url 'courses'%}" class="logo"><span>Courses</span></a>
               <div id="menu-btn" class="fas fa-bars"></div>
               <div id="search-btn" class="fas fa-search"></div>
               <div id="user-btn" class="fas fa-user"></div>
@@ -139,65 +193,55 @@
            </div>
      
            <div class="profile">
-              <img src="images/pic-1.jpg" class="image" alt="">
+              <img src="{{ user.userprofile.avatar.url }}" class="image" alt="">
               <h3 class="name">{{ user.get_username }}</h3>
-              <p class="role">studen</p>
-              <a href="profile.html" class="btn">view profile</a>
+              <p class="role">student</p>
+              <a href="{% url 'Profile'%}" class="btn">view profile</a>
 
               <div class="flex-btn">
-                 <a href="login.html" class="option-btn">login</a>
-                 <a href="register.html" class="option-btn">register</a>
+                 <a href="{% url 'logout'%}" class="option-btn">Logout</a>
+                 
               </div>
            </div>
      
         </section>
      
      </header> 
-     
-<div class="side-bar">
 
-    <div id="close-btn">
-       <i class="fas fa-times"></i>
-    </div>
- 
-    <div class="profile2">
-       
-            <img src="{% static 'images/logo.png' %}" class="image" alt="">
-            
-    </div>
- 
-    <nav class="navbar">
-    <ul>
-       
-       <a href="{% url 'C11' %}">1.1 Introduction to AI</a>
-       <a href="{% url 'C12' %}">1.2 Definition</a>
-       <a href="{% url 'C13' %}">1.3 Related Fields</a>
-
-    </ul>
-    </nav>
- 
- </div>
 
  <section class="courses">
-    <div>
+    <div class="content">
 <h1>Related fields</h1>
 </br>
-<p>In addition to AI, there are several other closely related topics that are good to know at least by name. These include machine learning, data science, and deep learning.</p>
-<p>Machine learning can be said to be a subfield of AI, which itself is a subfield of computer science (such categories are often somewhat imprecise and some parts of machine learning could be equally well or better belong to statistics). Machine learning enables AI solutions that are adaptive. A concise definition can be given as follows:</p>
-<p class="key">Machine learning
+<p class="Intro">In addition to AI, there are several other closely related topics that are good to know at least by name. These include machine learning, data science, and deep learning.</p>
+<p class="ML"><strong>Machine learning</strong> can be said to be a subfield of AI, which itself is a subfield of <strong>computer science</strong> (such categories are often somewhat imprecise and some parts of machine learning could be equally well or better belong to statistics). Machine learning enables AI solutions that are adaptive. A concise definition can be given as follows:</p>
+
+
+<div class="card">
+    <div class="container">
+<p>Key Terminology</p>
+<p class="key"><strong>Machine learning</strong>
     Systems that improve their performance in a given task with more and more experience or data.</p>
-<p class="Deep">Deep learning is a subfield of machine learning, which itself is a subfield of AI, which itself is a subfield of computer science. We will meet deep learning in some more detail in Chapter 5, but for now let us just note that the “depth” of deep learning refers to the complexity of a mathematical model, and that the increased computing power of modern computers has allowed researchers to increase this complexity to reach levels that appear not only quantitatively but also qualitatively different from before. As you notice, science often involves a number of progressively more special subfields, subfields of subfields, and so on. This enables researchers to zoom into a particular topic so that it is possible to catch up with the ever increasing amount of knowledge accrued over the years, and produce new knowledge on the topic — or sometimes, correct earlier knowledge to be more accurate.</p>
-<p class="DS">Data science is a recent umbrella term (term that covers several subdisciplines) that includes machine learning and statistics, certain aspects of computer science including algorithms, data storage, and web application development. Data science is also a practical discipline that requires understanding of the domain in which it is applied in, for example, business or science: its purpose (what "added value" means), basic assumptions, and constraints. Data science solutions often involve at least a pinch of AI (but usually not as much as one would expect from the headlines).</p>
-<p>Robotics means building and programming robots so that they can operate in complex, real-world scenarios. In a way, robotics is the ultimate challenge of AI since it requires a combination of virtually all areas of AI. For example:
+
+</div>
+</div>
+    <p class="ML"><strong>Deep learning</strong> 
+    is a subfield of machine learning, which itself is a subfield of AI, which itself is a subfield of computer science. We will meet deep learning in some more detail in Chapter 5, but for now let us just note that the “depth” of deep learning refers to the complexity of a mathematical model, and that the increased computing power of modern computers has allowed researchers to increase this complexity to reach levels that appear not only quantitatively but also qualitatively different from before. As you notice, science often involves a number of progressively more special subfields, subfields of subfields, and so on. This enables researchers to zoom into a particular topic so that it is possible to catch up with the ever increasing amount of knowledge accrued over the years, and produce new knowledge on the topic — or sometimes, correct earlier knowledge to be more accurate.</p>
+<p class="ML"><strong>Data science</strong> 
+    is a recent umbrella term (term that covers several subdisciplines) that includes machine learning and statistics, certain aspects of computer science including algorithms, data storage, and web application development. Data science is also a practical discipline that requires understanding of the domain in which it is applied in, for example, business or science: its purpose (what "added value" means), basic assumptions, and constraints. Data science solutions often involve at least a pinch of AI (but usually not as much as one would expect from the headlines).</p>
+<p class="ML"><strong>Robotics</strong> 
+    means building and programming robots so that they can operate in complex, real-world scenarios. In a way, robotics is the ultimate challenge of AI since it requires a combination of virtually all areas of AI. For example:
 
     Computer vision and speech recognition for sensing the environment
     Natural language processing, information retrieval, and reasoning under uncertainty for processing instructions and predicting consequences of potential actions
     Cognitive modeling and affective computing (systems that respond to expressions of human feelings or that mimic feelings) for interacting and working together with humans
     Many of the robotics-related AI problems are best approached by machine learning, which makes machine learning a central branch of AI for robotics.</p>
 <h3>Exercise 2: Taxonomy of AI</h3>
-<p>Your task: Construct a taxonomy in the Euler diagram example given below showing the relationships between the following things: AI, machine learning, computer science, data science, and deep learning.</p>
-    <img src="{% static 'images/exercise2.svg' %}"   />
-
+<p class="ML">Your task: Construct a taxonomy in the Euler diagram example given below showing the relationships between the following things: AI, machine learning, computer science, data science, and deep learning.</p>
+<div class="quiz"> 
+<img src="{% static 'images/exercise2.svg' %}" width="600px" height="400px"  />
+</div>
+<div class="question">
     <div class="quiz-container">
         <div class="question">Where would you put AI?</div>
         <div class="options">
@@ -251,16 +295,19 @@
 
     </div>
 
-
+</div>  
  </section>
+
+
+
  <form method="post">
     {% csrf_token %}
     <!-- Your existing content for chapter C11 -->
 
     <!-- Add the "Next" button -->
-    <button type="submit" class="inline-btn2">Next >></button>
+    <button type="submit" class="inline-btn2" id="next" >Next Section >></button>
 </form>
- 
+
 
 </body>
 
@@ -291,6 +338,7 @@ function selectOption(setIndex, answer, button) {
             // Enable the submit button only when all answers are selected for all sets
             const submitButton = document.querySelector('.submit-button');
             submitButton.disabled = !allAnswersSelected;
+ 
         }
 
         function submitQuiz() {
@@ -364,6 +412,17 @@ function selectOption(setIndex, answer, button) {
         overallScoreElement.textContent = overallScore;
         answerElements[answerElements.length - 1].appendChild(overallScoreElement);
     }
+
+const nextButton = document.getElementById('#next');
+
+// Add an event listener to the "Submit" button
+submitButton.addEventListener('click', () => {
+  // Check if all answers are correct
+  
+  // Enable the "Next" button if all answers are correct
+  nextButton.disabled = false;
+});
+
 </script>
 <script src="{% static 'js/script.js' %}"></script>
 </html>

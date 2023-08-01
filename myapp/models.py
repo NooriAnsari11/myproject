@@ -12,6 +12,9 @@ class Student(models.Model):
 class UserProgress(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     completed_chapters = models.IntegerField(default=0)
+    completed_chapters_course2=models.IntegerField(default=0)
+    completed_chapters_course3=models.IntegerField(default=0)
+    completed_chapters_course4=models.IntegerField(default=0)
     course1_completed = models.BooleanField(default=False)
     course2_completed = models.BooleanField(default=False)
     course3_completed = models.BooleanField(default=False)

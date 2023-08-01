@@ -1,30 +1,32 @@
 <!DOCTYPE html>
+{%load static%}
 <html>
 <head>
     <title>Understanding Bayes' Theorem</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+   <script src="{% static 'js/sketch.js'%}"></script>
+     <link rel="stylesheet" type="text/css" href="{% static 'style3.css'%}"> 
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+           
         }
 
-        .header {
-            text-align: center;
-            padding: 20px;
-            background-color: #008CBA;
-            color: white;
-        }
+        
 
         .card {
-            width: 80%;
+            width: 100%;
             margin: 20px auto;
             border: 1px solid #ddd;
             box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
             border-radius: 10px;
             padding: 20px;
             background-color: white;
+            border-left: 10px solid #8e44ad;
         }
         
         .card h2 {
@@ -33,12 +35,12 @@
         .card {
             box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
             transition: 0.3s;
-            width: 40%;
+            width: 100%;
             max-width: 800px;
             border-radius: 5px;
             padding: 15px;
             margin: 20px auto;
-            border-left: 5px solid #333;
+            border-left: 10px solid #8e44ad;
         }
         .card:hover {
             box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
@@ -85,16 +87,92 @@
         .incorrect {
             color: red;
         }
+        .bayes
+        {
+            display: flex;
+            justify-content: center;
+        }
+        .second{
+            margin-left: 20px;
+            font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+   
+        }
+        .bayes img{
+            border-radius: 110px;
+        }
+        h1,h3{
+  text-align: center;
+  margin-top: 20px;
+  font-size: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: rgb(7, 7, 7);
+}
+.key
+{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    padding: 10px;
+}
+
+.inline-btn2{
+    border-radius: 0.5rem;
+    color: #fff;
+    font-size: 1.8rem;
+    cursor: pointer;
+    text-transform: capitalize;
+    padding: 1rem 3rem;
+    text-align: center;
+    margin-top: 1rem;
+    display: inline-block;
+    background-color: var(--main-color);
+    right: 20px;
+    margin-left: 700px;
+}
+.inline-btn2:hover{
+   background-color: var(--black);
+   color: var(--white);
+}
+
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>Understanding Bayes' Theorem</h1>
-    </div>
+    <header class="header">
+   
+        <section class="flex">
+     
+            <a href="{% url 'index'%}" class="logo">AIPedia</a>
 
-    <div class="card">
-        <h2>What is Bayes' Theorem?</h2>
-        <p>Bayes' Theorem, named after Thomas Bayes, is a mathematical formula used in probability theory and statistics to calculate the likelihood of an event based on the prior knowledge of conditions that might be related to the event. In other words, it gives us a way to update our beliefs based on the arrival of new, relevant pieces of evidence.</p>
+    
+           <div class="icons">
+            <a href="{% url 'courses'%}" class="logo"><span>Courses</span></a>
+              <div id="menu-btn" class="fas fa-bars"></div>
+              <div id="search-btn" class="fas fa-search"></div>
+              <div id="user-btn" class="fas fa-user"></div>
+              <div id="toggle-btn" class="fas fa-sun"></div>
+              
+           </div>
+     
+           <div class="profile">
+              <img src="{{ user.userprofile.avatar.url }}" class="image" alt="">
+              <h3 class="name">{{ user.get_username }}</h3>
+              <p class="role">student</p>
+              <a href="{% url 'Profile'%}" class="btn">view profile</a>
+
+              <div class="flex-btn">
+                 <a href="{% url 'logout'%}" class="option-btn">Logout</a>
+                 
+              </div>
+           </div>
+     
+        </section>
+     
+     </header> 
+     <section class="courses"> 
+    <h1>Understanding Bayes' Theorem</h1>
+        <h2 class="key">What is Bayes' Theorem?</h2>
+        <p class="key">Bayes' Theorem, named after Thomas Bayes, is a mathematical formula used in probability theory and statistics to calculate the likelihood of an event based on the prior knowledge of conditions that might be related to the event. In other words, it gives us a way to update our beliefs based on the arrival of new, relevant pieces of evidence.</p>
+        <div class="card">
         <p>The theorem is stated mathematically as the following equation:</p>
         <code>P(A|B) = [P(B|A) * P(A)] / P(B)</code>
         <p>where:</p>
@@ -105,12 +183,18 @@
         </ul>
     </div>
 
-    <div class="card">
+    <div class="bayes">
+    <div>
+        <img src="{%static 'images/bayes.jpg'%}" width="100%" height="100%"/>
+    </div>
+    <div class="second">
         <h2>Example of Bayes' Theorem</h2>
         <p>Let's consider a real-world example. Assume we have a bag containing 30 green balls and 20 red balls. If we want to find out the probability that a ball drawn at random is green (Event A), that's pretty straightforward - it's just the number of green balls divided by the total number of balls. But suppose we also know that the ball is glowing in the dark, and that 90% of green balls and only 10% of red balls glow in the dark (Event B).</p>
         <p>Bayes' Theorem allows us to use this additional information to update our belief about whether the ball is green. We can calculate the probability that the ball is green given that it is glowing in the dark (P(Green|Glowing)) using Bayes' Theorem:</p>
         <p>P(Green|Glowing) = [P(Glowing|Green) * P(Green)] / P(Glowing)</p>
     </div>
+    </div>
+    
     <div class="card">
         <h2>Bayes' Theorem in Medical Diagnosis</h2>
         <p>Bayes' theorem is often used in the field of medical testing, where false positives and negatives can significantly impact a diagnosis. Let's consider an example involving heart disease.</p>
@@ -123,19 +207,27 @@
         <p>Once these values are calculated, they can be plugged into the original formula to get the posterior probability. This calculation can give a significantly different result than the perceived 90% chance, emphasizing the importance of considering prior probabilities and the true effectiveness of the test.</p>
     </div>
     
-    <div class="card">
+    <div class="key">
         <h2>Importance in AI and Machine Learning</h2>
         <p>Bayes' theorem is a foundational element of any course on probability, and its implications extend to many practical applications, including artificial intelligence and machine learning. Bayesian inference, based on Bayes’ theorem, is a method of statistical inference in which Bayes' theorem is used to update the probability for a hypothesis as evidence is acquired.</p>
         <p>In machine learning, it can be used for creating probabilistic models. Bayesian classifiers such as Naive Bayes classifiers are very common in machine learning applications. Additionally, Bayes' theorem is also a principle behind a very popular optimization algorithm called the Bayes' theorem algorithm.</p>
         <p>It allows us to incorporate our prior beliefs, and update them as we gather more data, leading to better long-term predictions. Thus, it's an essential concept in understanding machine learning and AI.</p>
     </div>
     <h3>Exercise</h3>
-    <p>A diagnostic test for a rare disease is said to be 98% accurate. If a patient has the disease, the test will return a positive result with 98% probability. Similarly, if a patient does not have the disease, the test will return a negative result with 98% probability. If 0.5% of the population has the disease and a patient tests positive, what is the probability they actually have the disease?</p>
+    <p class="key">A diagnostic test for a rare disease is said to be 98% accurate. If a patient has the disease, the test will return a positive result with 98% probability. Similarly, if a patient does not have the disease, the test will return a negative result with 98% probability. If 0.5% of the population has the disease and a patient tests positive, what is the probability they actually have the disease?</p>
     <form id="exercise">
         <input type="text" id="answer" placeholder="Enter your answer in decimal form">
         <button type="button" onclick="checkAnswer()">Check Answer</button>
     </form>
     <div id="result"></div>
+    </section>
+    <form method="post">
+        {% csrf_token %}
+        <!-- Your existing content for chapter C11 -->
+      
+        <!-- Add the "Next" button -->
+        <button type="submit" class="inline-btn2" id="next" >Next Section >></button>
+      </form>
     </body>
     <script>
         function checkAnswer() {
@@ -148,4 +240,5 @@
             }
         }
     </script>
+    <script src="{% static 'js/script.js' %}"></script>
     </html>

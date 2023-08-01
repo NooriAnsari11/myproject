@@ -3,14 +3,17 @@
 <html>
 <head>
     <title>Understanding k-Nearest Neighbors (KNN)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  <script src="{% static 'js/sketch.js'%}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'style3.css'%}"> 
     <style>
-  body {
-  font-family: Arial, sans-serif;
-  background-color: #f7f7f7;
-}
+  
 
 .container {
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 20px;
   border: 1px solid #ccc;
@@ -65,7 +68,7 @@ body {
 }
 
 .container {
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 20px;
   border: 1px solid #ccc;
@@ -80,57 +83,143 @@ h3 {
   margin-top: 20px;
 }
 
-input[type="submit"] {
-  background-color: #4CAF50;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  margin-top: 10px;
-}
 
-input[type="submit"]:hover {
-  background-color: #45a049;
-}
 
 .result {
   margin-top: 20px;
   font-weight: bold;
 }
 
-.header {
-      padding: 20px;
-      text-align: center;
-      background: #ffffff;
-      color: rgb(209, 162, 162);
-      font-size: 10px;
-    }
 
    
-    .main-content {
-      margin-left: 200px; /* Adjusted to move the main content to the right, next to the sidebar */
-      padding: 0px 10px;
-    }
+h1,h3,h2{
+  text-align: center;
+  margin-top: 20px;
+  font-size: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: rgb(7, 7, 7);
+}
+.key
+{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    padding: 10px;
+}
+.key2
+{
+    font-family:cursive;
+    font-size: 16px;
+    padding: 10px;
+}
+.images img{
+  margin-left:300px;
+}
+.card {
+            width: 100%;
+            margin: 20px auto;
+            border: 1px solid #ddd;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            padding: 20px;
+            background-color: white;
+            border-left: 10px solid #8e44ad;
+        }
+        
+        .card h2 {
+            color: #008CBA;
+        }
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+            width: 100%;
+            max-width: 800px;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px auto;
+            border-left: 10px solid #8e44ad;
+        }
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
+        .card ol{
+          font-size: 14px;;
+        }
+        ol{
+          font-size:14px;
+          font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+          margin-left:200px;
+          margin-right:200px;
+        }
+        .inline-btn2{
+    border-radius: 0.5rem;
+    color: #fff;
+    font-size: 1.8rem;
+    cursor: pointer;
+    text-transform: capitalize;
+    padding: 1rem 3rem;
+    text-align: center;
+    margin-top: 1rem;
+    display: inline-block;
+    background-color: var(--main-color);
+    right: 20px;
+    margin-left: 700px;
+}
+.inline-btn2:hover{
+   background-color: var(--black);
+   color: var(--white);
+}
     </style>
 </head>
 <body>
-    <div class="header">
+  <header class="header">
+   
+    <section class="flex">
+ 
+        <a href="{% url 'index'%}" class="logo">AIPedia</a>
+
+
+       <div class="icons">
+        <a href="{% url 'courses'%}" class="logo"><span>Courses</span></a>
+          <div id="menu-btn" class="fas fa-bars"></div>
+          <div id="search-btn" class="fas fa-search"></div>
+          <div id="user-btn" class="fas fa-user"></div>
+          <div id="toggle-btn" class="fas fa-sun"></div>
+          
+       </div>
+ 
+       <div class="profile">
+          <img src="{{ user.userprofile.avatar.url }}" class="image" alt="">
+          <h3 class="name">{{ user.get_username }}</h3>
+          <p class="role">student</p>
+          <a href="{% url 'Profile'%}" class="btn">view profile</a>
+
+          <div class="flex-btn">
+             <a href="{% url 'logout'%}" class="option-btn">Logout</a>
+             
+          </div>
+       </div>
+ 
+    </section>
+ 
+ </header> 
+ <section>
         <h1>Understanding k-Nearest Neighbors (KNN) - A Simple Yet Powerful Machine Learning Algorithm</h1>
-      </div>   
+         
       
     
-      <div class="main-content">
-        
-<h1>Understanding k-Nearest Neighbors (KNN) - A Simple Yet Powerful Machine Learning Algorithm</h1>
+      
 
 <h2>Introduction</h2>
-<p>
+<p class="key2">
     K-nearest neighbors is a supervised machine learning technique used for both classification and regression tasks. It operates by identifying the k closest training examples in the feature space to a given data point. The prediction made depends on whether it's used for classification or regression. In classification, it assigns a label to the data point based on the majority class among its k nearest neighbors. In regression, it predicts a value by averaging the values of the k closest neighbors. The value of k, a positive integer, is crucial in this approach, with smaller values like 3 or 5 often preferred in practice. The "K" in K-nearest neighbors signifies the number of neighboring items used in the prediction process, depending on whether it's a classification or regression problem. The diagram below illustrates the process of utilizing K-nearest neighbors for making predictions.
     
 </p>
-<img src="{%static 'images/knn.png'%}" />
+<div class="images">
+<img src="{%static 'images/knn.png'%}" width="50%" />
+</div>
 <h2>How does KNN Work?</h2>
-<p>
+<div class="card">
+<p class="key2">
     There are two main phases in the KNN algorithm:
 </p>
 <ol>
@@ -145,7 +234,7 @@ input[type="submit"]:hover {
         </ul>
     </li>
 </ol>
-
+</div>
 <h2>Key Aspects of KNN</h2>
 <ol>
     <li><strong>Choice of 'k':</strong> The number of neighbors to consider, 'k', is a user-defined constant. Different values of 'k' may result in different predictions. A small value of 'k' makes the model more sensitive to noise, whereas a large 'k' can smooth over some of the finer details of the data.</li>
@@ -154,14 +243,14 @@ input[type="submit"]:hover {
 </ol>
 
 <h2>Applications of KNN</h2>
-<p>
+<p class="key2">
     Despite its simplicity, KNN is a versatile algorithm used in a wide array of applications, from recommender systems and image recognition to economic forecasting and genetics. Its simplicity, coupled with its effectiveness, makes KNN a good benchmark for more complex classifiers like Artificial Neural Networks (ANN) and Support Vector Machines (SVM).
 </p>
 
 <div class="container">
     <h1>Next Purchase Prediction with K-NN</h1>
-    <p>We have data from six users. For each user, we have recorded their recent shopping history of four items and the item they bought after buying these four items:</p>
-   <p>
+    <p class="key">We have data from six users. For each user, we have recorded their recent shopping history of four items and the item they bought after buying these four items:</p>
+   <p class="key">
     The most recent purchase is the one in the rightmost column, so for example, after buying a t-shirt, flip flops, sunglasses, and Moby Dick (novel), Ville bought sunscreen. Our hypothesis is that after buying similar items, other users are also likely to buy sunscreen.
 
 To apply the nearest neighbor method, we need to define what we mean by nearest. This can be done in many different ways, some of which work better than others. Let’s use the shopping history to define the similarity (“nearness”) by counting how many of the items have been purchased by both users.
@@ -231,17 +320,18 @@ To apply the nearest neighbor method, we need to define what we mean by nearest.
   </div>
   <form id="quizForm">
     <h3>Question 1:</h3>
-    <p>Who is the user most similar to Travis?</p>
+    <p class="key">Who is the user most similar to Travis?</p>
     <input type="text" name="q1" id="q1Answer" placeholder="Enter your answer">
 
     <div id="q1Result" class="result"></div>
    
     <h3>Question 2:</h3>
-    <p>What is the predicted purchase for Travis?</p>
+    <p class="key">What is the predicted purchase for Travis?</p>
     <input type="text" name="q2" id="q2Answer" placeholder="Enter your answer">
 
     <div id="q2Result" class="result"></div>
-    <input type="submit" value="Submit">
+   
+    <button type="button"  onclick="checkAnswer()">Check Answer</button>
   </form>
 
   <div id="totalScore" class="result"></div>
@@ -249,14 +339,21 @@ To apply the nearest neighbor method, we need to define what we mean by nearest.
   </div>
 </div>
 </div>
+</section>
+<form method="post">
+  {% csrf_token %}
+  <!-- Your existing content for chapter C11 -->
+
+  <!-- Add the "Next" button -->
+  <button type="submit" class="inline-btn2" id="next" >Next Section >></button>
+</form>
 </body>
 <script>
- document.getElementById("quizForm").onsubmit = function (event) {
+function checkAnswer() {
   event.preventDefault();
 
   // Get user answers
   const q1Answer = document.getElementById("q1Answer").value.trim().toLowerCase();
-  alert(q1Answer)
   const q2Answer = document.getElementById("q2Answer").value.trim().toLowerCase();
 
   // Check user answers
@@ -304,8 +401,9 @@ To apply the nearest neighbor method, we need to define what we mean by nearest.
   // Display total score
   const totalScoreDiv = document.getElementById("totalScore");
   totalScoreDiv.innerHTML = `You scored ${score} out of 2 questions correctly!`;
-};
+}
 
 
 </script>
+<script src="{% static 'js/script.js' %}"></script>
 </html>

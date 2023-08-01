@@ -10,7 +10,7 @@
     <!-- font awesome cdn link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
  
-    <link rel="stylesheet" type="text/css" href="{% static 'style2.css'%}"> 
+    <link rel="stylesheet" type="text/css" href="{% static 'style3.css'%}"> 
 </head>
 <style>
 
@@ -39,47 +39,74 @@
     display: inline-block;
     background-color: var(--main-color);
     right: 20px;
-    margin-left: 700px;
+    margin-left: 1000px;
 }
 .inline-btn2:hover{
    background-color: var(--black);
    color: var(--white);
 }
+
+.containerv{
+   display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+.img{
+   display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.courses p{
+   font-size: 18px;
+   font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.courses h1{
+   text-align: center;
+   font-size: 20px;
+   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body{
+   width: 100%;
+}
 </style>
 <body>
-    <header class="header">
+   <header class="header">
    
-        <section class="flex">
-     
-            <a href="home.html" class="logo">AIPedia</a>
+      <section class="flex">
+   
+          <a href="{% url 'index'%}" class="logo">AIPedia</a>
 
-    
-           <div class="icons">
-            <a href="#"><i class="fas fa-graduation-cap"></i><span>Courses</span></a>
-              <div id="menu-btn" class="fas fa-bars"></div>
-              <div id="search-btn" class="fas fa-search"></div>
-              <div id="user-btn" class="fas fa-user"></div>
-              <div id="toggle-btn" class="fas fa-sun"></div>
-              
-           </div>
-     
-           <div class="profile">
-              <img src="images/pic-1.jpg" class="image" alt="">
-              <h3 class="name">{{ user.get_username }}</h3>
-              <p class="role">studen</p>
-              <a href="profile.html" class="btn">view profile</a>
+  
+         <div class="icons">
+          <a href="{% url 'courses'%}" class="logo"><span>Courses</span></a>
+            <div id="menu-btn" class="fas fa-bars"></div>
+            <div id="search-btn" class="fas fa-search"></div>
+            <div id="user-btn" class="fas fa-user"></div>
+            <div id="toggle-btn" class="fas fa-sun"></div>
+            
+         </div>
+   
+         <div class="profile">
+            <img src="{{ user.userprofile.avatar.url }}" class="image" alt="">
+            <h3 class="name">{{ user.get_username }}</h3>
+            <p class="role">student</p>
+            <a href="{% url 'Profile'%}" class="btn">view profile</a>
 
-              <div class="flex-btn">
-                 <a href="login.html" class="option-btn">login</a>
-                 <a href="register.html" class="option-btn">register</a>
-              </div>
-           </div>
+            <div class="flex-btn">
+               <a href="{% url 'logout'%}" class="option-btn">Logout</a>
+               
+            </div>
+         </div>
+   
+      </section>
+   
+   </header> 
      
-        </section>
-     
-     </header> 
-     
-<div class="side-bar">
+<!--<div class="side-bar">
 
     <div id="close-btn">
        <i class="fas fa-times"></i>
@@ -101,28 +128,29 @@
     </ul>
     </nav>
  
- </div>
+ </div>-->
 
  <section class="courses">
     <div>
 <h1> 'Definition Of AI'</h1>
 </br>
 <p>Artificial intelligence (AI) is currently one of the hottest buzzwords in tech and with good reason. The last few years have seen several innovations and advancements that have previously been solely in the realm of science fiction slowly transform into reality. Experts regard artificial intelligence as a factor of production, which has the potential to introduce new sources of growth and change the way work is done across industries. For instance, this PWC article predicts that AI could potentially contribute $15.7 trillion to the global economy by 2035. China and the United States are primed to benefit the most from the coming AI boom, accounting for nearly 70% of the global impact.</p>
-<img src="{% static 'images/self.gif' %}"   />
+<div class="img">
+<img src="{% static 'images/self.gif' %}" width="500px" height="300px"   />
+</div>
 <h2>Artificial Intelligence is a method of making a computer, a computer-controlled robot, or a software think intelligently like the human mind. AI is accomplished by studying the patterns of the human brain and by analyzing the cognitive process. The outcome of these studies develops intelligent software and systems.</h2>
-<video width="320" height="240" controls>
+<div class="containerv">
+<video  width="500" height="300" controls>
     <source src="{% static 'video/1.mp4' %}" type="video/mp4">
-   
   </video>
+  </div>
 
 
  </section>
  <form method="post">
     {% csrf_token %}
-    <!-- Your existing content for chapter C11 -->
-
-    <!-- Add the "Next" button -->
-    <button type="submit" class="inline-btn2">Next >></button>
+    
+    <button type="submit" class="inline-btn2">Next Section >></button>
 </form>
  
 </body>

@@ -25,6 +25,9 @@ urlpatterns = [
    path('C41',views.C41,name='C41'),
    path('C42',views.C42,name='C42'),
      path('C1',views.C1,name='C1'),
+     path('C2',views.C2,name='C2'),
+     path('C3',views.C3,name='C3'),
+      path('C4',views.C4,name='C4'),
 
 
     

@@ -10,7 +10,7 @@
     <!-- font awesome cdn link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
  
- <link rel="stylesheet" type="text/css" href="{% static 'style2.css'%}"> 
+ <link rel="stylesheet" type="text/css" href="{% static 'style3.css'%}"> 
 </head>
 <style>
 
@@ -104,7 +104,7 @@
     display: inline-block;
     background-color: var(--main-color);
     right: 20px;
-    margin-left: 700px;
+    margin-left: 1000px;
 }
 .inline-btn2:hover{
    background-color: var(--black);
@@ -117,11 +117,11 @@
    
         <section class="flex">
      
-            <a href="home.html" class="logo">AIPedia</a>
+            <a href="{% url 'index'%}" class="logo">AIPedia</a>
 
     
            <div class="icons">
-            <a href="#" class="logo"><span>Courses</span></a>
+            <a href="{% url 'courses'%}" class="logo"><span>Courses</span></a>
               <div id="menu-btn" class="fas fa-bars"></div>
               <div id="search-btn" class="fas fa-search"></div>
               <div id="user-btn" class="fas fa-user"></div>
@@ -130,14 +130,14 @@
            </div>
      
            <div class="profile">
-              <img src="images/pic-1.jpg" class="image" alt="">
+              <img src="{{ user.userprofile.avatar.url }}" class="image" alt="">
               <h3 class="name">{{ user.get_username }}</h3>
-              <p class="role">studen</p>
-              <a href="profile.html" class="btn">view profile</a>
+              <p class="role">student</p>
+              <a href="{% url 'Profile'%}" class="btn">view profile</a>
 
               <div class="flex-btn">
-                 <a href="login.html" class="option-btn">login</a>
-                 <a href="register.html" class="option-btn">register</a>
+                 <a href="{% url 'logout'%}" class="option-btn">Logout</a>
+                 
               </div>
            </div>
      
@@ -145,7 +145,7 @@
      
      </header> 
      
-<div class="side-bar">
+<!--<div class="side-bar">
 
     <div id="close-btn">
        <i class="fas fa-times"></i>
@@ -167,7 +167,7 @@
     </ul>
     </nav>
  
- </div>
+ </div>-->
 
  <section class="courses">
     <div>
@@ -211,7 +211,7 @@
     <!-- Your existing content for chapter C11 -->
 
     <!-- Add the "Next" button -->
-    <button type="submit" class="inline-btn2">Next >></button>
+    <button type="submit" class="inline-btn2">Next Section >></button>
 </form>
  
 </body>

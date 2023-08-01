@@ -1,7 +1,14 @@
 <!DOCTYPE html>
+{%load static%}
 <html>
 <head>
     <title>Understanding Odds and Probability</title>
+     <!-- font awesome cdn link  -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+   <script src="{% static 'js/sketch.js'%}"></script>
+     <link rel="stylesheet" type="text/css" href="{% static 'style3.css'%}"> 
     <style>
        body {font-family: Arial, sans-serif;}
         .card {
@@ -12,7 +19,7 @@
             border-radius: 5px;
             padding: 15px;
             margin: 20px auto;
-            border-left: 5px solid #333;
+            border-left: 10px solid #8e44ad;
         }
         .card:hover {
             box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
@@ -59,9 +66,95 @@
         .incorrect {
             color: red;
         }
+        h1{
+  text-align: center;
+  margin-top: 20px;
+  font-size: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: rgb(7, 7, 7);
+}
+p
+{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    padding: 20px;
+  
+}
+
+.algorithm-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #cfb6b6;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.algorithm-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.steps {
+    list-style: decimal;
+    padding-left: 20px;
+    font-size: 14px;
+}
+
+.inline-btn2{
+    border-radius: 0.5rem;
+    color: #fff;
+    font-size: 1.8rem;
+    cursor: pointer;
+    text-transform: capitalize;
+    padding: 1rem 3rem;
+    text-align: center;
+    margin-top: 1rem;
+    display: inline-block;
+    background-color: var(--main-color);
+    right: 20px;
+    margin-left: 700px;
+}
+.inline-btn2:hover{
+   background-color: var(--black);
+   color: var(--white);
+}
     </style>
 </head>
 <body>
+    <header class="header">
+   
+        <section class="flex">
+     
+            <a href="{% url 'index'%}" class="logo">AIPedia</a>
+
+    
+           <div class="icons">
+            <a href="{% url 'courses'%}" class="logo"><span>Courses</span></a>
+              <div id="menu-btn" class="fas fa-bars"></div>
+              <div id="search-btn" class="fas fa-search"></div>
+              <div id="user-btn" class="fas fa-user"></div>
+              <div id="toggle-btn" class="fas fa-sun"></div>
+              
+           </div>
+     
+           <div class="profile">
+              <img src="{{ user.userprofile.avatar.url }}" class="image" alt="">
+              <h3 class="name">{{ user.get_username }}</h3>
+              <p class="role">student</p>
+              <a href="{% url 'Profile'%}" class="btn">view profile</a>
+
+              <div class="flex-btn">
+                 <a href="{% url 'logout'%}" class="option-btn">Logout</a>
+                 
+              </div>
+           </div>
+     
+        </section>
+     
+     </header> 
+     <section class="courses">
 <h1>Understanding Odds and Probability</h1>
 <p>In statistics, both "odds" and "probability" are used to describe the likelihood of a particular event occurring. They are related concepts but are not identical.</p>
 <div class="card">
@@ -72,6 +165,7 @@
     </div>
 </div>
 <p>Probability is generally represented as a fraction or decimal between 0 and 1, or as a percentage between 0% and 100%. A probability of 0 signifies the event will definitely not happen, while a probability of 1 indicates the event will definitely happen.</p>
+<img src="{%static 'images/p.jpg'%}" width="100%" height="500px"/>
 <div class="card">
     <div class="container">
         <h3>Odds</h3>
@@ -79,22 +173,19 @@
         <code>Formula: Odds(E) = Number of favorable outcomes / Number of unfavorable outcomes</code>
     </div>
 </div>
-<div class="card">
-    <div class="container">
+<div class="algorithm-container">
         <h3>Importance of Probability and Odds in AI</h3>
         <p>Probability and odds are foundational in AI. They provide a framework for dealing with uncertainty in data, making decisions, and drawing conclusions. Here's why these concepts are crucial:</p>
-        <ul>
+        <ol class="steps">
             <li><strong>Uncertainty Handling:</strong> Real-world data is full of uncertainties. Probability provides a solid framework for dealing with this uncertainty.</li>
             <li><strong>Statistical Inference:</strong> Many AI algorithms rely on statistical inference to draw conclusions from data. These algorithms often use probability distributions to model the data.</li>
             <li><strong>Bayesian Networks:</strong> These use probability theory and graph theory to model complex systems. They are used in various fields, from computer vision to natural language processing.</li>
             <li><strong>Decision Making:</strong> Some AI algorithms need to make decisions based on uncertain information. They often frame these decisions as a series of probabilistic inferences.</li>
             <li><strong>Evaluating Model Performance:</strong> In AI, probability helps in measuring the performance of models. Metrics like precision, recall, AUC-ROC etc., all stem from the understanding of probability.</li>
             <li><strong>Natural Language Processing:</strong> Probability is extensively used in NLP. For example, language models often calculate the probability of a word given the previous words in a sentence.</li>
-        </ul>
+        </ol>
         <p>As for odds, while they are less commonly used in AI, they are sometimes used as an alternative way of expressing probabilities. This can be useful in certain contexts. For instance, in logistic regression, the log-odds of the positive class is modeled as a linear combination of the features.</p>
-    </div>
-</div>
-
+  </div>
 <p>In conclusion, while both odds and probability provide information about the likelihood of an event occurring, they do so in different ways and are not interchangeable. It's important to note that probabilities can be converted into odds and vice versa, but the numerical values will be different.</p>
 
 <h3>Probability Quiz</h3>
@@ -122,6 +213,16 @@
             <button type="button" onclick="checkAnswers()">Submit</button>
         </form>
         <div id="results"></div>
+
+    </section>
+    <form method="post">
+        {% csrf_token %}
+        <!-- Your existing content for chapter C11 -->
+      
+        <!-- Add the "Next" button -->
+        <button type="submit" class="inline-btn2" id="next" >Next Section >></button>
+      </form>
+      
 </body>
 <script>
     function checkAnswers() {
@@ -154,6 +255,7 @@
 }
 
 </script>
+<script src="{% static 'js/script.js' %}"></script>
 </html>
 
 
