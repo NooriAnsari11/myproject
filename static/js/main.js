@@ -1,4 +1,4 @@
-console.log('JavaScript Beginner Projects: Tic Tac Toe!');
+
 
 window.addEventListener('DOMContentLoaded', () => {
   _Setup();
